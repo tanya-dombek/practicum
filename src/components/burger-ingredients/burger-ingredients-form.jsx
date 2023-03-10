@@ -1,22 +1,32 @@
 import React, {useState} from 'react'
-import './burger-ingredients.css'
+import styles from './burger-ingredients.module.css'
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsComponent from './ingredients-component'
+import { ingredientPropTypes } from '../../utils/types'
+import Modal from '../modal-components/modal'
+import IngredientDetails from './ingredient-ditails';
  
-function BurgerIngredients ({ingredientsData}) {
-    const bunIngredients = ingredientsData.filter(item => item.type === 'bun');
-    const sauceIngredients = ingredientsData.filter(item => item.type === 'sauce');
-    const mainIngredients = ingredientsData.filter(item => item.type === 'main');
-    
+function BurgerIngredients ({ingredientData}) {
+    const bunIngredients = ingredientData.filter(item => item.type === 'bun');
+    const sauceIngredients = ingredientData.filter(item => item.type === 'sauce');
+    const mainIngredients = ingredientData.filter(item => item.type === 'main');
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentIngredient, setCurrentIngredient] = useState(null);
+
+    const toggleModal = (ingredient) => {
+        setIsOpen(!isOpen);
+        setCurrentIngredient(ingredient);
+      };
 
     const setCurrent = () => {
 
     }
     return ( 
-        <div className='ingredientsContainer'>
-            <p className="text text_type_main-large mainP pt-10 pb-5">Соберите бургер</p>
-            <div className='flexContent'>
+        <div className={styles.ingredientsContainer}>
+            <p className={`text text_type_main-large ${styles.mainP} pt-10 pb-5`}>Соберите бургер</p>
+            <div className={styles.flexContent}>
                 <Tab value="one" active={true} onClick={setCurrent}>
                     Булки
                 </Tab>
@@ -27,48 +37,39 @@ function BurgerIngredients ({ingredientsData}) {
                     Начинки
                 </Tab>
             </div>
-            <div className='scrollBar custom-scroll'>
+            <div className={`${styles.scrollBar} custom-scroll`}>
                 <div className="text text_type_main-medium pt-10 pb-6">Булки</div>
-                <div className='pl-4 pr-4 ingredientsGroup'>
+                <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {bunIngredients.map((item) => (
-                        <IngredientsComponent key={item._id} ingredientData={[item]}/>
+                        <IngredientsComponent key={item._id} ingredientData={[item]}
+                        onToggleModal={() => toggleModal(item)} />
                     ))}
                 </div>
                     
                 <div className="text text_type_main-medium pt-10 pb-6">Соусы</div>
-                <div className='pl-4 pr-4 ingredientsGroup'>
+                <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {sauceIngredients.map((item) => (
-                        <IngredientsComponent key={item._id} ingredientData={[item]}/>
+                        <IngredientsComponent key={item._id} ingredientData={[item]}
+                        onToggleModal={() => toggleModal(item)} />
                     ))}
                 </div>
                 <div className="text text_type_main-medium pt-10 pb-6">Начинки</div>
-                <div className='pl-4 pr-4 ingredientsGroup'>
+                <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {mainIngredients.map((item) => (
-                        <IngredientsComponent key={item._id} ingredientData={[item]}/>
+                        <IngredientsComponent key={item._id} ingredientData={[item]}
+                        onToggleModal={() => toggleModal(item)} />
                     ))}
                 </div>
             </div>
-            
+            {isOpen && (<Modal onClose={toggleModal} title='Детали ингредиента'>
+                <IngredientDetails ingredientInfo={currentIngredient}/>
+            </Modal>)}
         </div>
-        );
-    
+    );
 }
 
 IngredientsComponent.propTypes = {
-    ingredientData: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        calories: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        proteins: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        __v: PropTypes.number.isRequired,
-    }))
+    ingredientData: ingredientPropTypes
 }
  
 export default BurgerIngredients ;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './burger-contructor.css'
+import styles from'./burger-contructor.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import {data} from '../../utils/data';
 import {normalaizedData} from './order-data';
@@ -8,13 +8,13 @@ const orderData = normalaizedData(data);
  
 function BurgerItemsList () {
     return ( 
-        <div className='pb-10 orderContainer pr-4 scrollBar custom-scroll'>
+        <div className={`pb-10 ${styles.orderContainer} pr-4 ${styles.scrollBar} custom-scroll`}>
             {orderData.map((item, index) => {
                 let addIcon;
                 if (!item.isLocked) {
-                    addIcon = <DragIcon type="primary" />
+                    addIcon = (<DragIcon type="primary" key={index}/>);
                 }
-                return <div className='ingredientIconContainer'>
+                return (<div className={styles.ingredientIconContainer}>
                     {addIcon}
                     <ConstructorElement
                         type={item.type==='top' ? 'top' : item.type==='bottom' ? 'bottom' : undefined}
@@ -22,12 +22,12 @@ function BurgerItemsList () {
                         text={item.text}
                         price={item.price}
                         thumbnail={item.thumbnail}
-                        key={index}
+                        key={item.id}
                     />
-                </div>
+                </div>)
             })}
         </div>
-        );
+    );
 }
  
 export default BurgerItemsList ;

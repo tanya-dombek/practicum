@@ -1,11 +1,10 @@
 import React from 'react';
-import './modal.css';
+import styles from './modal.module.css';
 import PropTypes from 'prop-types';
 
 function ModalOverlay({ handleClick }) {
-    console.log('handleClick', handleClick);
     return (
-        <div className='overlay' onClick={handleClick}/>       
+        <div className={styles.overlay} onClick={handleClick}/>       
     )
 }
 

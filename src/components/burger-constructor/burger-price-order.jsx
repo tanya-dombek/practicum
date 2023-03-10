@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import './burger-contructor.css'
+import styles from'./burger-contructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import Modal from '../modal_components/modal';
+import Modal from '../modal-components/modal';
 import OrderDetails from './order-details'
 
  
@@ -10,22 +10,21 @@ function ComponentsInfo () {
     const toggleModal = () => {
         setIsOpen(!isOpen);
       };
-      const orderNumber = 34536;
 
     return ( 
-        <div className='priceOrderContainer pr-4'>
-            <div className='pr-10 priceIconContainer'>
+        <div className={`${styles.priceOrderContainer} pr-4`}>
+            <div className={`pr-10 ${styles.priceIconContainer}`}>
                 <p className="text text_type_digits-medium">610</p>
                 <CurrencyIcon type="primary" />
             </div>
             <Button htmlType="button" type="primary" size="medium" onClick={toggleModal}>
                 Оформить заказ
             </Button>
-            {isOpen && <Modal open = {isOpen} onClose={toggleModal} title=''>
-                <OrderDetails orderNumber={orderNumber}/>
-            </Modal>}
+            {isOpen && (<Modal open = {isOpen} onClose={toggleModal} title=''>
+                <OrderDetails/>
+            </Modal>)}
         </div>
-        );
+    );
     
 }
  

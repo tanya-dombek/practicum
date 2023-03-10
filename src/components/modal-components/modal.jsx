@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import ModalOverlay from './modal-overlay'
+import styles from './modal.module.css';
 import PropTypes from 'prop-types';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function Modal({ children, onClose, title }) {
 useEffect(()=> {
     const handleEscapeBtn = (e) => {
-        if (e.keyCode == 27) {
+        if (e.key === 'Escape') {
             onClose();
         }
     };
@@ -21,13 +22,12 @@ useEffect(()=> {
         (
             <>
                 <ModalOverlay handleClick={onClose}/>
-                <div className='modal pt-10 pb-15 pr-10 pl-10'>
-                    <p className="text text_type_main-large titleIcon">
+                <div className={`${styles.modal} pt-10 pb-15 pr-10 pl-10`}>
+                    <p className={`text text_type_main-large ${styles.titleIcon}`}>
                         {title}
-                        <div className='closeIcon'>
+                        <span className={styles.closeIcon}>
                             <CloseIcon onClick={onClose} type="primary"/>
-                        </div>
-                        
+                        </span>
                     </p>
                     {children}
                 </div>
