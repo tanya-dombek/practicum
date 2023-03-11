@@ -14,7 +14,7 @@ function BurgerItemsList () {
                 if (!item.isLocked) {
                     addIcon = (<DragIcon type="primary" key={index}/>);
                 }
-                return (<div className={styles.ingredientIconContainer}>
+                return (<div className={styles.ingredientIconContainer} key={index}>
                     {addIcon}
                     <ConstructorElement
                         type={item.type==='top' ? 'top' : item.type==='bottom' ? 'bottom' : undefined}
@@ -22,7 +22,7 @@ function BurgerItemsList () {
                         text={item.text}
                         price={item.price}
                         thumbnail={item.thumbnail}
-                        key={item.id}
+                        key={index}
                     />
                 </div>)
             })}

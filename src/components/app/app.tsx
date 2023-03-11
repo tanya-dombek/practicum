@@ -27,13 +27,13 @@ function App() {
   }, []);
 
   return (
-    <main className={styles.App}>
+    <div className={styles.App}>
       <AppHeader/>
-      <div className={styles.constructorGroupe}>
+      <main className={styles.constructorGroupe}>
         <BurgerIngredients ingredientData={state.data}/>
         <BurgerConstructor />
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 
