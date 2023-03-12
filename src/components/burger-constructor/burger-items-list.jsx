@@ -12,7 +12,7 @@ function BurgerItemsList () {
             {orderData.map((item, index) => {
                 let addIcon;
                 if (!item.isLocked) {
-                    addIcon = (<DragIcon type="primary" key={index}/>);
+                    addIcon = (<DragIcon type="primary"/>);
                 }
                 return (<div className={styles.ingredientIconContainer} key={index}>
                     {addIcon}
@@ -22,7 +22,6 @@ function BurgerItemsList () {
                         text={item.text}
                         price={item.price}
                         thumbnail={item.thumbnail}
-                        key={index}
                     />
                 </div>)
             })}
