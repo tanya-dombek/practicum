@@ -37,6 +37,39 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    align-items: stretch;
+}
+
+.emptyIngredientContainer{
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2f2f37;
+    width: 100%;
+    min-height: 80px;
+    max-width: 536px;
+    font-family: 'Jet Brains Mono';
+    font-size: 16px;
+    line-height: 24px;
+    color: #F2F2F3;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+.borderBun{
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.borderIngredient{
+    border: 1px solid transparent;
+    gap: 16px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .scrollBar{
