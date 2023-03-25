@@ -86,3 +86,13 @@
 .orderNumder{
     text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
 }
+
+.emptyTopContainer{
+    border-radius: 88px 88px 40px 40px;
+}
+.emptyBottomContainer{
+    border-radius: 40px 40px 88px 88px;
+}
+.emptyMiddleContainer{
+    border-radius: 40px;
+}

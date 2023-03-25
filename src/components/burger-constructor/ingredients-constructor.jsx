@@ -54,7 +54,6 @@ function IngredientsConstructorList ({item, moveIngredient, id, index}) {
     const [{isDragging}, dragIngredient] = useDrag({
         type: 'sort',
         item: () => {
-            console.log(item);
             return {id, index};
         },
         collect: (monitor) => ({
@@ -93,7 +92,7 @@ IngredientsConstructorList.propTypes = {
         proteins: PropTypes.number.isRequired,
         type: PropTypes.string.isRequired,
         __v: PropTypes.number.isRequired,
-    }),
+    }).isRequired,
     moveIngredient: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,

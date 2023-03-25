@@ -1,5 +1,4 @@
-export const OPEN_ORDER_MODAL = 'OPEN_ORDER_MODAL';
-export const POST_ORDER_REQUEST = 'GET_ORDER_REQUEST';
+export const CLOSE_ORDER_MODAL = 'CLOSE_ORDER_MODAL';
 export const POST_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const POST_ORDER_FAILED = 'GET_ORDER_FAILED';
 
@@ -7,9 +6,6 @@ export function getOrderData(ids) {
     const url = 'https://norma.nomoreparties.space/api/orders';
     const body = {"ingredients": ids}
     return function(dispatch) {
-      dispatch({
-        type: POST_ORDER_REQUEST
-      });
       fetch(url, {
         method: 'POST',
         headers: {
@@ -24,10 +20,14 @@ export function getOrderData(ids) {
             }
             return res.json();
         }).then(result => {
-            if (result) {
+            if (result && result.success) {
                 dispatch({
                     type: POST_ORDER_SUCCESS,
                     orderNumber: result.order.number
+                });
+            } else {
+                dispatch({
+                    type: POST_ORDER_FAILED
                 });
             }
         }).catch(err => {

@@ -15,7 +15,7 @@ function BurgerItemsList () {
     const addBun = (item) => {
         dispatch(getSelectedBun(item));
         dispatch({type: INCREASE_COUNTER, item})
-        if (selectedBun._id) {
+        if (selectedBun) {
             dispatch({type: DECREASE_COUNTER, item: selectedBun})
         }
     }
@@ -26,7 +26,7 @@ function BurgerItemsList () {
     }
 
     const moveIngredient = (dragIndex, hoverIndex) => {
-        dispatch(updateIngredientsConstructor(dragIndex, hoverIndex, selectedIngredients));
+        dispatch(updateIngredientsConstructor(dragIndex, hoverIndex));
     }
 
     const [{isHover}, dropBunTarget] = useDrop({
@@ -65,19 +65,19 @@ function BurgerItemsList () {
     return ( 
         <div className={`pb-10 ${styles.orderContainer} pr-4 ${styles.scrollBar} custom-scroll`}>
             <div ref={dropBunTarget} style={{borderColor: borderBunColor}} className={styles.borderBun}>
-                {selectedBun.name ? (<ConstructorElement  type='top' isLocked={true} price={selectedBun.price} thumbnail={selectedBun.image_mobile}
+                {selectedBun ? (<ConstructorElement  type='top' isLocked={true} price={selectedBun.price} thumbnail={selectedBun.image_mobile}
                 text={`${selectedBun.name} (верх)`}/>) :
-                (<div className={styles.emptyIngredientContainer} style={{borderRadius: '88px 88px 40px 40px'}}>Выберите булки</div>)}
+                (<div className={`${styles.emptyIngredientContainer} ${styles.emptyTopContainer}`}>Выберите булки</div>)}
             </div>
             <div ref={dropTarget} style={{borderColor: borderIngredientColor}} className={styles.borderIngredient}>
                 {selectedIngredients.length !== 0 ? selectedIngredients.map((item, index) => {
                     return (<IngredientsConstructorList item={item} key={item.key} moveIngredient={moveIngredient} id={item.key} index={index}/>)
-                }) : (<div className={`${styles.emptyIngredientContainer} ml-10`} style={{borderRadius: '40px'}}>Выберите ингредиенты</div>)}
+                }) : (<div className={`${styles.emptyIngredientContainer} ${styles.emptyMiddleContainer} ml-10`}>Выберите ингредиенты</div>)}
             </div>
             <div ref={dropBunBottomTarget} style={{borderColor: borderBunColor}} className={styles.borderBun}>
-            {selectedBun.name ? (<ConstructorElement  type='bottom' isLocked={true} price={selectedBun.price} thumbnail={selectedBun.image_mobile}
+            {selectedBun ? (<ConstructorElement  type='bottom' isLocked={true} price={selectedBun.price} thumbnail={selectedBun.image_mobile}
                 text={`${selectedBun.name} (низ)`}/>) :
-                (<div className={styles.emptyIngredientContainer} style={{borderRadius: '40px 40px 88px 88px'}}>Выберите булки</div>)}
+                (<div className={`${styles.emptyIngredientContainer} ${styles.emptyBottomContainer}`}>Выберите булки</div>)}
             </div>
         </div>
     );

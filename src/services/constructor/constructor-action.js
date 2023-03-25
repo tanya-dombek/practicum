@@ -22,16 +22,12 @@ export function getSelectedIngredient(item) {
   };
 }
 
-export function updateIngredientsConstructor(dragIndex, hoverIndex, selectedIngredients) {
-  const dragIngredient = selectedIngredients[dragIndex];
-  const newList = [...selectedIngredients];
-  newList.splice(dragIndex, 1);
-  newList.splice(hoverIndex, 0, dragIngredient);
-
+export function updateIngredientsConstructor(dragIndex, hoverIndex) {
   return function(dispatch) {
     dispatch({
       type: UPDATE_INGREDIENT,
-      updatedIngredient: newList
+      dragIndex: dragIndex,
+      hoverIndex: hoverIndex,
     });
   };
 }

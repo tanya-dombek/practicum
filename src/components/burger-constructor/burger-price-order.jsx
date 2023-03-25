@@ -1,17 +1,20 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import styles from'./burger-contructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../modal-components/modal';
 import OrderDetails from './order-details'
 import { useSelector, useDispatch } from 'react-redux';
-import { OPEN_ORDER_MODAL, getOrderData } from '../../services/order/order-action';
+import { getOrderData, CLOSE_ORDER_MODAL } from '../../services/order/order-action';
 
  
 function ComponentsInfo () {
     const dispatch = useDispatch();
     const { selectedIngredients, selectedBun } = useSelector(store => store.cart);
-    const totalPrice = selectedIngredients.reduce((acc, item) => acc + item.price, 0) + (selectedBun.price ? (selectedBun.price*2) : 0);
     const isOpen = useSelector(store => store.order.openOrderModal);
+
+    const totalPrice = useMemo(() => {
+        return selectedIngredients.reduce((acc, item) => acc + item.price, 0) + (selectedBun ? (selectedBun.price*2) : 0);
+    }, [selectedIngredients, selectedBun]);
 
     const orderIdArray = (bun, ingredients) => {
         let idArray = [];
@@ -23,9 +26,12 @@ function ComponentsInfo () {
         return idArray
     }
 
-    const toggleModal = () => {
+    const openModal = () => {
         dispatch(getOrderData(orderIdArray(selectedBun, selectedIngredients)))
-        dispatch({type: OPEN_ORDER_MODAL})
+    };
+
+    const closeModal = () => {
+        dispatch({type: CLOSE_ORDER_MODAL})
     };
 
     return ( 
@@ -34,10 +40,10 @@ function ComponentsInfo () {
                 <p className="text text_type_digits-medium">{totalPrice}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button htmlType="button" type="primary" size="medium" onClick={toggleModal} disabled={selectedIngredients.length===0 && !selectedBun.price}>
+            <Button htmlType="button" type="primary" size="medium" onClick={openModal} disabled={selectedIngredients.length===0 || !selectedBun}>
                 Оформить заказ
             </Button>
-            {isOpen && (<Modal open = {isOpen} onClose={toggleModal} title=''>
+            {isOpen && (<Modal open = {isOpen} onClose={closeModal} title=''>
                 <OrderDetails/>
             </Modal>)}
         </div>

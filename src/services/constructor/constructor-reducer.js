@@ -2,7 +2,7 @@ import {ADD_BUN, ADD_INGREDIENT, DELETE_ITEM, UPDATE_INGREDIENT} from './constru
 
 const initialState = {
   selectedIngredients: [],
-  selectedBun: {},
+  selectedBun: null,
   };
 
   export const constructorReducer = (state = initialState, action) => {
@@ -26,9 +26,13 @@ const initialState = {
         };
       }
       case UPDATE_INGREDIENT: {
+        const dragIngredient = state.selectedIngredients[action.dragIndex];
+        const newList = [...state.selectedIngredients];
+        newList.splice(action.dragIndex, 1);
+        newList.splice(action.hoverIndex, 0, dragIngredient);
         return {
           ...state,
-          selectedIngredients: action.updatedIngredient
+          selectedIngredients: newList
         };
       }
         default: {
