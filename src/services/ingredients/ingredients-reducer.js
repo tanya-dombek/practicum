@@ -1,4 +1,4 @@
-import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, INCREASE_COUNTER, DECREASE_COUNTER } from "./ingredients-action";
+import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, INCREASE_COUNTER, DECREASE_COUNTER, RESET_COUNTER } from "./ingredients-action";
 
 const initialState = {
     ingredients: [],
@@ -26,6 +26,14 @@ const initialState = {
           ...state,
           ingredients: [...state.ingredients].map(item =>
             item._id === action.item._id && item.count ? { ...item, count: --item.count } : item
+          )
+        };
+      }
+      case RESET_COUNTER: {
+        return {
+          ...state,
+          ingredients: [...state.ingredients].map(item =>
+            item.count ? { ...item, count: 0 } : item
           )
         };
       }

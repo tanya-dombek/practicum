@@ -1,4 +1,4 @@
-import { GET_INGREDIENT_DETAILS, OPEN_MODAL, CLOSE_MODAL } from "./ingredient-details-action";
+import { GET_INGREDIENT_DETAILS, CLOSE_MODAL } from "./ingredient-details-action";
 
 const initialState = {
     currentIngredient: null,
@@ -10,13 +10,8 @@ const initialState = {
       case GET_INGREDIENT_DETAILS: {
         return {
           ...state,
-          currentIngredient: action.currentIngredient
-        };
-      }
-      case OPEN_MODAL: {
-        return {
-          ...state,
-          openModal: state.currentIngredient ? true : false
+          currentIngredient: action.currentIngredient,
+          openModal: action.currentIngredient ? true : false
         };
       }
       case CLOSE_MODAL: {

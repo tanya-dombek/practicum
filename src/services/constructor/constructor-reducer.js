@@ -1,4 +1,4 @@
-import {ADD_BUN, ADD_INGREDIENT, DELETE_ITEM, UPDATE_INGREDIENT} from './constructor-action';
+import {ADD_BUN, ADD_INGREDIENT, DELETE_ITEM, UPDATE_INGREDIENT, RESET_CONSTRUCTOR} from './constructor-action';
 
 const initialState = {
   selectedIngredients: [],
@@ -33,6 +33,13 @@ const initialState = {
         return {
           ...state,
           selectedIngredients: newList
+        };
+      }
+      case RESET_CONSTRUCTOR: {
+        return {
+          ...state,
+          selectedBun: null,
+          selectedIngredients: []
         };
       }
         default: {

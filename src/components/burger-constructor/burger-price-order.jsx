@@ -5,6 +5,8 @@ import Modal from '../modal-components/modal';
 import OrderDetails from './order-details'
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderData, CLOSE_ORDER_MODAL } from '../../services/order/order-action';
+import {RESET_CONSTRUCTOR} from '../../services/constructor/constructor-action';
+import {RESET_COUNTER} from '../../services/ingredients/ingredients-action';
 
  
 function ComponentsInfo () {
@@ -31,7 +33,9 @@ function ComponentsInfo () {
     };
 
     const closeModal = () => {
-        dispatch({type: CLOSE_ORDER_MODAL})
+        dispatch({type: CLOSE_ORDER_MODAL});
+        dispatch({type: RESET_CONSTRUCTOR});
+        dispatch({type: RESET_COUNTER});
     };
 
     return ( 

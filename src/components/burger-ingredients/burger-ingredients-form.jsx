@@ -6,7 +6,7 @@ import Modal from '../modal-components/modal'
 import IngredientDetails from './ingredient-ditails';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
-import { getIgredientDetails, OPEN_MODAL, CLOSE_MODAL } from '../../services/ingredient-details/ingredient-details-action';
+import { getIgredientDetails, CLOSE_MODAL } from '../../services/ingredient-details/ingredient-details-action';
  
 function BurgerIngredients () {
     const dispatch = useDispatch();
@@ -24,11 +24,9 @@ function BurgerIngredients () {
 
     const openModal = (ingredient) => {
         dispatch(getIgredientDetails(ingredient))
-        dispatch({type: OPEN_MODAL})
     };
 
     const closeModal = () => {
-        // dispatch(getIgredientDetails(ingredient))
         dispatch({type: CLOSE_MODAL})
     };
 

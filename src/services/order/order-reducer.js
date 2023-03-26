@@ -9,7 +9,7 @@ const initialState = {
   export const orderReducer = (state = initialState, action) => {
     switch (action.type) {
       case POST_ORDER_SUCCESS: {
-        return { ...state, orderFailed: false, orderNumber: action.orderNumber, openOrderModal: true };
+        return { ...state, orderFailed: false, orderNumber: action.orderNumber, openOrderModal: action.orderNumber ? true : false};
       }
       case POST_ORDER_FAILED: {
         return { ...state, orderFailed: true };
