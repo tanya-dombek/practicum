@@ -7,10 +7,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getOrderData, CLOSE_ORDER_MODAL } from '../../services/order/order-action';
 import {RESET_CONSTRUCTOR} from '../../services/constructor/constructor-action';
 import {RESET_COUNTER} from '../../services/ingredients/ingredients-action';
+import { useNavigate  } from 'react-router-dom';
 
  
 function ComponentsInfo () {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useSelector(store => store.user.user)
     const { selectedIngredients, selectedBun } = useSelector(store => store.cart);
     const isOpen = useSelector(store => store.order.openOrderModal);
 
@@ -29,7 +32,11 @@ function ComponentsInfo () {
     }
 
     const openModal = () => {
-        dispatch(getOrderData(orderIdArray(selectedBun, selectedIngredients)))
+        if (!user) {
+            navigate('/login');
+          } else {
+            dispatch(getOrderData(orderIdArray(selectedBun, selectedIngredients)))
+          }
     };
 
     const closeModal = () => {

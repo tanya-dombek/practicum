@@ -77,3 +77,8 @@
     width: 120px;
     gap: 8px;
 }
+
+.ingredientsLink{
+    text-decoration: none;
+    color: white;
+}
