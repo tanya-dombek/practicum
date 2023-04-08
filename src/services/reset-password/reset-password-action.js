@@ -28,7 +28,8 @@ export function postResetPassword(newData) {
                 });
             } else {
                 dispatch({
-                    type: RESET_PASSWORD_FAILED
+                    type: RESET_PASSWORD_FAILED,
+                    errMsg: result.message
                 });
             }
         }).catch(err => {

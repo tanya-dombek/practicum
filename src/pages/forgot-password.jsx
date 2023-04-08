@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import styles from './pages.module.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,38 +7,27 @@ import { postForgotPassword } from '../services/forgot-password/forgot-password-
 
 export function ForgotPasswordPage() {
   const dispatch = useDispatch();
-  const resetPasswordWasSent = useSelector(store => store.forgotPassword.resetPasswordWasSent);
+  const apiData = useSelector(store => store.forgotPassword);
   const [value, setValue] = useState('')
 
-  const handleClick = useCallback(() => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     dispatch(postForgotPassword(value));
-  }, [dispatch, value]);
+  };
 
-  useEffect(()=> {
-    const handleEscapeBtn = (e) => {
-        if (e.key === 'Enter') {
-          handleClick();
-        }
-    };
-    document.addEventListener('keydown', handleEscapeBtn);
-    return()=> {
-        document.removeEventListener('keydown', handleEscapeBtn);
-    };
-  }, [handleClick])
-
-  if (resetPasswordWasSent) {
+  if (apiData.resetPasswordWasSent) {
     return (
       <Navigate
         to={'/reset-password'}
       />
     );
-  }
+  };
 
   const linksStyle = `${styles.pagesLinks} text text_type_main-default`;
 
   return (
     <div className={styles.mainDiv}>
-    <div className={styles.loginPage}>
+    <form onSubmit={onSubmit} className={styles.loginPage}>
         <p className='text text_type_main-medium'>Восстановление пароля</p>
         <EmailInput
             onChange={e => setValue(e.target.value)}
@@ -47,12 +36,13 @@ export function ForgotPasswordPage() {
             name={'email'}
             isIcon={false}
             extraClass="ml-1"/>
-        <Button htmlType="button" type="primary" size="large" onClick={e => handleClick(e)}>Восстановить</Button>
+        {apiData.errMsg && <p className={`${styles.errMsg} text text_type_main-default`}>{apiData.errMsg}</p>}
+        <Button htmlType="submit" type="primary" size="large">Восстановить</Button>
         <div className={styles.toolTips}>
             <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?</p>
             <Link to={'/login'} className={linksStyle}>Войти</Link>
         </div>
-    </div>
+    </form>
     </div>
   );
 }

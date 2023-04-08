@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import styles from './pages.module.css';
 import { Input, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -7,7 +7,7 @@ import { postRegistration } from '../services/register/register-action';
 
 export function RegistrationPage() {
   const dispatch = useDispatch();
-  const registrationSuccessful = useSelector(store => store.registration.registrationSuccessful);
+  const apiData = useSelector(store => store.registration);
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({name: '', email: '', password: ''})
 
@@ -15,27 +15,16 @@ export function RegistrationPage() {
     setShowPassword(!showPassword);
   }
 
-  const handleClick = useCallback(() => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     dispatch(postRegistration(user));
-  }, [dispatch, user]);
-
-  useEffect(()=> {
-    const handleEscapeBtn = (e) => {
-        if (e.key === 'Enter') {
-          handleClick();
-        }
-    };
-    document.addEventListener('keydown', handleEscapeBtn);
-    return()=> {
-        document.removeEventListener('keydown', handleEscapeBtn);
-    };
-  }, [handleClick])
+  };
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  if (registrationSuccessful) {
+  if (apiData.registrationSuccessful) {
     return (
       <Navigate
         to={'/profile'}
@@ -47,7 +36,7 @@ export function RegistrationPage() {
 
   return (
     <div className={styles.mainDiv}>
-    <div className={styles.loginPage}>
+    <form onSubmit={onSubmit} className={styles.loginPage}>
         <p className='text text_type_main-medium'>Регистрация</p>
         <Input
             type={'text'}
@@ -75,12 +64,13 @@ export function RegistrationPage() {
             onIconClick={onIconClick}
             errorText={'Ошибка'}
             extraClass="ml-1"/>
-        <Button htmlType="button" type="primary" size="large" onClick={e => handleClick(e)}>Зарегистрироваться</Button>
+        {apiData.errMsg && <p className={`${styles.errMsg} text text_type_main-default`}>{apiData.errMsg}</p>}
+        <Button htmlType="submit" type="primary" size="large">Зарегистрироваться</Button>
         <div className={styles.toolTips}>
             <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?</p>
             <Link to={'/login'} className={linksStyle}>Войти</Link>
         </div>
-    </div>
+    </form>
     </div>
   );
 }

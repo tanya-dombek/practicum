@@ -24,7 +24,9 @@ function AppHeader () {
                         )}
                     </NavLink>
                 </div>
-                <Logo/>
+                <NavLink to='/'>
+                    <Logo/>
+                </NavLink>
                 <NavLink to='/profile' className={({isActive}) => isActive ? activeTabStyle : tabStyle}>
                     {({ isActive }) => (<>
                         <ProfileIcon  type={isActive ? 'primary' : 'secondary'} />

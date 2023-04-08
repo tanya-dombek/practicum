@@ -25,7 +25,8 @@ export function postForgotPassword(email) {
                 });
             } else {
                 dispatch({
-                    type: FORGOT_PASSWORD_FAILED
+                    type: FORGOT_PASSWORD_FAILED,
+                    errMsg: result.message
                 });
             }
         }).catch(err => {

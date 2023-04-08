@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import styles from './pages.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -9,34 +9,23 @@ import { postResetPassword } from '../services/reset-password/reset-password-act
 export function ResetPasswordPage() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const resetPasswordSuccessful = useSelector(store => store.resetPassword.resetPasswordSuccessful);
+  const apiData = useSelector(store => store.resetPassword);
   const [newData, setNewData] = useState({password: '', code: ''})
   
   const onIconClick = () => {
     setShowPassword(!showPassword);
   }
 
-  const handleClick = useCallback(() => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     dispatch(postResetPassword(newData));
-  }, [dispatch, newData]);
-
-  useEffect(()=> {
-    const handleEscapeBtn = (e) => {
-        if (e.key === 'Enter') {
-          handleClick();
-        }
-    };
-    document.addEventListener('keydown', handleEscapeBtn);
-    return()=> {
-        document.removeEventListener('keydown', handleEscapeBtn);
-    };
-  }, [handleClick])
+  };
 
   const handleChange = e => {
     setNewData({ ...newData, [e.target.name]: e.target.value });
   };
 
-  if (resetPasswordSuccessful) {
+  if (apiData.resetPasswordSuccessful) {
     return (
       <Navigate
         to={'/profile'}
@@ -48,7 +37,7 @@ export function ResetPasswordPage() {
 
   return (
     <div className={styles.mainDiv}>
-    <div className={styles.loginPage}>
+    <form onSubmit={onSubmit} className={styles.loginPage}>
         <p className='text text_type_main-medium'>Восстановление пароля</p>
         <Input
             type={showPassword ? 'text' : 'password'}
@@ -71,12 +60,13 @@ export function ResetPasswordPage() {
           errorText={'Ошибка'}
           size={'default'}
           extraClass="ml-1"/>
-        <Button htmlType="button" type="primary" size="large" onClick={e => handleClick(e)}>Сохранить</Button>
+        {apiData.errMsg && <p className={`${styles.errMsg} text text_type_main-default`}>{apiData.errMsg}</p>}
+        <Button htmlType="submit" type="primary" size="large">Сохранить</Button>
         <div className={styles.toolTips}>
             <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?</p>
             <Link to={'/login'} className={linksStyle}>Войти</Link>
         </div>
-    </div>
+    </form>
     </div>
   );
 }

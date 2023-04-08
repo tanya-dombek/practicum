@@ -30,7 +30,6 @@ export function ProfilePage() {
 
   const handleClick = () => {
     dispatch(signOut());
-    
   };
 
   const resetChanges = () => {
@@ -38,7 +37,8 @@ export function ProfilePage() {
     setUser(origUser);
   };
 
-  const submitChanges = () => {
+  const handleSubmit  = (e) => {
+    e.preventDefault();
     dispatch(changeUserInfo(user, password));
     setOrigUser(user);
     setPassword('');
@@ -60,7 +60,7 @@ export function ProfilePage() {
         <NavLink onClick={(e) => {handleClick(e)}} className={`text text_type_main-large text_color_inactive ${styles.tabLink}`}>Выход</NavLink>
         <p style={{maxWidth: '350px'}} className="text text_type_main-default text_color_inactive">В этом разделе вы можете изменить свои персональные данные</p>
       </div>
-    <div className={styles.loginPage}>
+    <form onSubmit={handleSubmit} className={styles.loginPage}>
         <Input
           type={'text'}
           name={'name'}
@@ -94,10 +94,10 @@ export function ProfilePage() {
         {(!_.isEmpty(diff) || password !== '') && (
           <div className={styles.toolTips}>
             <Button htmlType="button" type="secondary" size="large" onClick={resetChanges}>Отменить</Button>
-            <Button htmlType="button" type="primary" size="large" onClick={submitChanges}>Сохранить</Button>
+            <Button htmlType="submit" type="primary" size="large">Сохранить</Button>
           </div>
         )}
-    </div>
+    </form>
     </div>
   );
 }

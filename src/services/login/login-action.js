@@ -17,11 +17,13 @@ export function signIn(user) {
         },
         body: JSON.stringify(body)
       }).then(res => {
+        console.log(res);
             if (!res.ok) {
                 dispatch({type: LOGIN_FAILED});
             }
             return res.json();
         }).then(result => {
+            console.log(result);
             if (result && result.success) {
                 localStorage.setItem("accessToken", result.accessToken);
                 localStorage.setItem("refreshToken", result.refreshToken);
@@ -35,9 +37,10 @@ export function signIn(user) {
                     user: result.user
                 });
             } else {
-                dispatch({type: LOGIN_FAILED});
+                dispatch({type: LOGIN_FAILED, errMsg: result.message});
             }
         }).catch(err => {
+            console.log(err);
             dispatch({
                 type: LOGIN_FAILED
             })

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
 import { Input, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './pages.module.css';
@@ -9,33 +9,19 @@ import { signIn } from '../services/login/login-action';
 export function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loginSuccessful = useSelector(store => store.login.loginSuccessful);
+  const apiData = useSelector(store => store.login);
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({email: '', password: ''})
 
   const onIconClick = () => {
     setShowPassword(!showPassword);
-  }
+  };
 
-  let login = useCallback(
-    e => {
+  let onSubmit = e => {
       e.preventDefault();
       dispatch(signIn(user));
-      if (loginSuccessful) {navigate(-1)};
-    }, [user, dispatch, navigate, loginSuccessful]
-  );
-
-  useEffect(()=> {
-    const handleEscapeBtn = (e) => {
-        if (e.key === 'Enter') {
-          login(e);
-        }
-    };
-    document.addEventListener('keydown', handleEscapeBtn);
-    return()=> {
-        document.removeEventListener('keydown', handleEscapeBtn);
-    };
-  }, [login])
+      if (apiData.loginSuccessful) {navigate(-1)};
+  };
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -45,7 +31,7 @@ export function LoginPage() {
 
   return (
       <div className={styles.mainDiv}>
-      <div className={styles.loginPage}>
+      <form onSubmit={onSubmit} className={styles.loginPage}>
           <p className='text text_type_main-medium'>Вход</p>
           <EmailInput
             onChange={e => handleChange(e)}
@@ -64,7 +50,8 @@ export function LoginPage() {
             onIconClick={onIconClick}
             errorText={'Ошибка'}
             extraClass="ml-1"/>
-          <Button htmlType="button" type="primary" size="large" onClick={login}>Войти</Button>
+          {apiData.errMsg && <p className={`${styles.errMsg} text text_type_main-default`}>{apiData.errMsg}</p>}
+          <Button htmlType="submit" type="primary" size="large">Войти</Button>
           <div className={styles.toolTips}>
               <p className="text text_type_main-default text_color_inactive">Вы — новый пользователь?</p>
               <Link to={'/register'} className={linksStyle}>Зарегистрироваться</Link>
@@ -73,7 +60,7 @@ export function LoginPage() {
               <p className="text text_type_main-default text_color_inactive">Забыли пароль?</p>
               <Link to={'/forgot-password'} className={linksStyle}>Восстановить пароль</Link>
           </div>
-      </div>
+      </form>
       </div>
     );
 }

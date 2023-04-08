@@ -2,6 +2,7 @@ import { RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED } from "./reset-password-
 
 const initialState = {
     resetPasswordSuccessful: false,
+    errMsg: null
   };
 
   export const resetPasswordReducer = (state = initialState, action) => {
@@ -10,7 +11,7 @@ const initialState = {
         return { ...state, resetPasswordSuccessful: true};
       }
       case RESET_PASSWORD_FAILED: {
-        return { ...state, resetPasswordSuccessful: false };
+        return { ...state, resetPasswordSuccessful: false, errMsg: action.errMsg };
       }
       default: {
         return state;

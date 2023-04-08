@@ -40,7 +40,8 @@ export function postRegistration(user) {
 
             } else {
                 dispatch({
-                    type: REGISTER_FAILED
+                    type: REGISTER_FAILED,
+                    errMsg: result.message
                 });
             }
         }).catch(err => {

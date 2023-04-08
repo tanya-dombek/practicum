@@ -3,6 +3,7 @@ import { LOGIN_SUCCESS, LOGIN_FAILED, SET_AUTH } from "./login-action";
 const initialState = {
     user: null,
     isAuthChecked: false,
+    errMsg: null,
     loginSuccessful: false,
   };
 
@@ -12,7 +13,7 @@ const initialState = {
         return { ...state, loginSuccessful: true, user: action.user};
       }
       case LOGIN_FAILED: {
-        return { ...state, loginSuccessful: false };
+        return { ...state, loginSuccessful: false, errMsg: action.errMsg };
       }
       case SET_AUTH: {
         return { ...state, isAuthChecked: action.isAuthChecked}
