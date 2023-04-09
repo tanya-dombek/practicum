@@ -1,0 +1,71 @@
+.mainDiv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 24px;
+    justify-content: center;
+}
+
+.toolTips {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.profileNavLinks {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.activeTabLink{
+    text-decoration: none;
+    color: white;
+}
+
+.tabLink {
+    text-decoration: none;
+}
+
+.pagesLinks {
+    text-decoration: none;
+    color: #4C4CFF;
+}
+
+.inputExtraClass {
+    border-color: #4C4CFF;
+}
+
+.notFoundPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20%;
+    gap: 50px;
+}
+
+.notFoundPageH1 {
+    color: #4C4CFF;
+    font-size: 100px;
+}
+
+.notFoundPageP {
+    color: #9635c7;
+    font-size: 30px;
+}
+
+.errMsg {
+    color: #9635c7;
+}

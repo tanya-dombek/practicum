@@ -1,21 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import styles from './burger-ingredients.module.css'
+import { useLocation, Link } from 'react-router-dom';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsComponent from './ingredients-component'
-import Modal from '../modal-components/modal'
-import IngredientDetails from './ingredient-ditails';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
-import { getIgredientDetails, CLOSE_MODAL } from '../../services/ingredient-details/ingredient-details-action';
+import { getIgredientDetails } from '../../services/ingredient-details/ingredient-details-action';
  
 function BurgerIngredients () {
     const dispatch = useDispatch();
+    let location = useLocation();
     const bunIngredients = useSelector(store => store.ingredients.ingredients.filter(item => item.type === 'bun'));
     const sauceIngredients = useSelector(store => store.ingredients.ingredients.filter(item => item.type === 'sauce'));
     const mainIngredients = useSelector(store => store.ingredients.ingredients.filter(item => item.type === 'main'));
-
-    const currentIngredient = useSelector(store => store.details.currentIngredient);
-    const isOpen = useSelector(store => store.details.openModal);
 
     const [activeTab, setActiveTab] = useState('one');
     const [bunRef, bunInView] = useInView({ threshold: 0 });
@@ -24,11 +21,7 @@ function BurgerIngredients () {
 
     const openModal = (ingredient) => {
         dispatch(getIgredientDetails(ingredient))
-    };
-
-    const closeModal = () => {
-        dispatch({type: CLOSE_MODAL})
-    };
+    };;
 
     useEffect(() => {
         if (bunInView) {
@@ -58,29 +51,32 @@ function BurgerIngredients () {
                 <div ref={bunRef} className="text text_type_main-medium pt-10 pb-6">Булки</div>
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {bunIngredients.map((item) => (
-                        <IngredientsComponent key={item._id} ingredientData={[item]}
-                        onToggleModal={() => openModal(item)}/>
+                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
+                            <IngredientsComponent key={item._id} ingredientData={[item]}
+                            onToggleModal={() => openModal(item)}/>
+                        </Link>
                     ))}
                 </div>
                     
                 <div ref={sauceRef} className="text text_type_main-medium pt-10 pb-6">Соусы</div>
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {sauceIngredients.map((item) => (
-                        <IngredientsComponent key={item._id} ingredientData={[item]}
-                        onToggleModal={() => openModal(item)}/>
+                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
+                            <IngredientsComponent key={item._id} ingredientData={[item]}
+                            onToggleModal={() => openModal(item)}/>
+                        </Link>
                     ))}
                 </div>
                 <div ref={mainRef} className="text text_type_main-medium pt-10 pb-6">Начинки</div>
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {mainIngredients.map((item) => (
-                        <IngredientsComponent key={item._id} ingredientData={[item]}
-                        onToggleModal={() => openModal(item)}/>
+                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
+                            <IngredientsComponent key={item._id} ingredientData={[item]}
+                            onToggleModal={() => openModal(item)}/>
+                        </Link>
                     ))}
                 </div>
             </div>
-            {isOpen && (<Modal title='Детали ингредиента' onClose={closeModal}>
-                <IngredientDetails ingredientInfo={currentIngredient}/>
-            </Modal>)}
         </div>
     );
 }

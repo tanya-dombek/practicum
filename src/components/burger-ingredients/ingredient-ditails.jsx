@@ -1,12 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from './burger-ingredients.module.css'
-import PropTypes from 'prop-types';
 import CaloriesDetails from './calories-details';
-import { ingredientPropTypes } from '../../utils/types'
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
  
-function IngredientDetails  ({ingredientInfo}) {
+function IngredientDetails  () {
+    const [ingredientInfo, setIngredientInfo] = useState(null);
+    const ingredients = useSelector(store => store.ingredients.ingredients);
+    let { id } = useParams();
+
+    useEffect(
+        () => {
+            setIngredientInfo(ingredients.find(item => item._id === id));
+        }, [id, setIngredientInfo, ingredients]
+    );
+
     return ( 
-        <div className={styles.modalItems}>
+        ingredientInfo && (<div className={styles.modalItems}>
            <img srcSet={ingredientInfo.image_large} alt={ingredientInfo.name} />
             <p className="text text_type_main-medium pt-4 pb-8">{ingredientInfo.name}</p>
             <div className={styles.caloriesDiv}>
@@ -16,11 +27,8 @@ function IngredientDetails  ({ingredientInfo}) {
                 <CaloriesDetails amount={ingredientInfo.carbohydrates} name='Углеводы, г'/>
             </div>
         </div>
-    );
-}
-
-IngredientDetails.propTypes = {
-    ingredientData: ingredientPropTypes
+        )
+    )
 }
  
 export default IngredientDetails;
