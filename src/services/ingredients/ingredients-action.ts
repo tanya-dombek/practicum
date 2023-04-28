@@ -1,4 +1,6 @@
 import { TIngredientData, AppThunk } from '../../types/types';
+import { BASE_URL } from '../../utils/rests-utils';
+import { request } from '../../utils/rests-utils';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
 export const INCREASE_COUNTER = 'INCREASE_COUNTER';
@@ -6,23 +8,16 @@ export const DECREASE_COUNTER = 'DECREASE_COUNTER';
 export const RESET_COUNTER = 'RESET_COUNTER';
 
 export type TIgredientsAction =
-  | { type: 'GET_INGREDIENTS_SUCCESS', ingredients: TIngredientData }
-  | { type: 'GET_INGREDIENTS_FAILED' }
-  | { type: 'INCREASE_COUNTER' }
-  | { type: 'DECREASE_COUNTER' }
-  | { type: 'RESET_COUNTER' };
+  | { type: typeof GET_INGREDIENTS_SUCCESS, ingredients: TIngredientData }
+  | { type: typeof GET_INGREDIENTS_FAILED }
+  | { type: typeof INCREASE_COUNTER, item: TIngredientData }
+  | { type: typeof DECREASE_COUNTER, item: TIngredientData }
+  | { type: typeof RESET_COUNTER };
 
 export function getIgredients(): AppThunk {
-    const url = 'https://norma.nomoreparties.space/api/ingredients';
+    const url = BASE_URL + '/ingredients';
     return function(dispatch) {
-      fetch(url).then(res => {
-            if (!res.ok) {
-                dispatch({
-                    type: GET_INGREDIENTS_FAILED
-                });
-            }
-            return res.json();
-        }).then(result => {
+      request(url, {method: 'GET'}).then(result => {
             if (result && result.success) {
                 dispatch({
                     type: GET_INGREDIENTS_SUCCESS,

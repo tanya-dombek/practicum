@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import styles from './pages.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../types/types';
 import { postResetPassword } from '../services/reset-password/reset-password-action';
-import { RootState } from '../services/root-reducer';
 import { TResetPasswordType } from '../types/types';
 
 export function ResetPasswordPage() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const apiData = useSelector((store: RootState) => store.resetPassword);
+  const apiData = useSelector(store => store.resetPassword);
   const [newData, setNewData] = useState<TResetPasswordType>({password: '', code: ''})
   
   const onIconClick = () => {

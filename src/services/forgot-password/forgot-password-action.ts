@@ -1,29 +1,24 @@
 import { AppThunk } from '../../types/types';
+import { BASE_URL } from '../../utils/rests-utils';
+import { request } from '../../utils/rests-utils';
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
 export const FORGOT_PASSWORD_FAILED = 'FORGOT_PASSWORD_FAILED';
 
 export type TForgotPasswordAction =
-  | { type: 'FORGOT_PASSWORD_SUCCESS' }
-  | { type: 'FORGOT_PASSWORD_FAILED', errMsg?: string };
+  | { type: typeof FORGOT_PASSWORD_SUCCESS }
+  | { type: typeof FORGOT_PASSWORD_FAILED, errMsg?: string };
 
 export function postForgotPassword(email: string): AppThunk {
-    const url = 'https://norma.nomoreparties.space/api/password-reset';
+    const url = BASE_URL + '/password-reset';
     const body = {"email": email}
     return function(dispatch) {
-      fetch(url, {
+      request(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(body)
-      }).then(res => {
-            if (!res.ok) {
-                dispatch({
-                    type: FORGOT_PASSWORD_FAILED
-                });
-            }
-            return res.json();
-        }).then(result => {
+      }).then(result => {
             if (result && result.success) {
                 dispatch({
                     type: FORGOT_PASSWORD_SUCCESS,

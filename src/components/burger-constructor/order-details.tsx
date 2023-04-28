@@ -1,12 +1,10 @@
 import React from 'react'
 import { ReactComponent as CheckMarkIcon } from '../../utils/success-icon.svg'
 import styles from'./burger-contructor.module.css'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../services/root-reducer';
-
+import { useSelector } from '../../types/types';
  
 function OrderDetails () {
-    const orderNumber: number = useSelector((store: RootState) => store.order.orderNumber);
+    const orderNumber: number = useSelector(store => store.order.orderNumber);
 
     return ( 
         <div className={styles.modalItems}>

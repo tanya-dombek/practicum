@@ -1,32 +1,27 @@
 import { AppThunk, TResetPasswordType } from '../../types/types';
+import { BASE_URL } from '../../utils/rests-utils';
+import { request } from '../../utils/rests-utils';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
 
 export type TResetPasswordAction =
-  | { type: 'RESET_PASSWORD_SUCCESS' }
-  | { type: 'RESET_PASSWORD_FAILED', errMsg?: string };
+  | { type: typeof RESET_PASSWORD_SUCCESS }
+  | { type: typeof RESET_PASSWORD_FAILED, errMsg?: string };
 
 export function postResetPassword(newData: TResetPasswordType): AppThunk {
-    const url = ' https://norma.nomoreparties.space/api/password-reset/reset';
+    const url = BASE_URL + '/password-reset/reset';
     const body = {
         "password": newData.password,
         "token": newData.code
       }
     return function(dispatch) {
-      fetch(url, {
+      request(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(body)
-      }).then(res => {
-            if (!res.ok) {
-                dispatch({
-                    type: RESET_PASSWORD_FAILED
-                });
-            }
-            return res.json();
-        }).then(result => {
+      }).then(result => {
             if (result && result.success) {
                 dispatch({
                     type: RESET_PASSWORD_SUCCESS

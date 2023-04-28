@@ -7,11 +7,11 @@ export const UPDATE_INGREDIENT = 'UPDATE_INGREDIENT';
 export const RESET_CONSTRUCTOR = 'RESET_CONSTRUCTOR';
 
 export type TConstructorAction =
-  | { type: 'ADD_INGREDIENT', selectedIngredient: TIngredientData }
-  | { type: 'ADD_BUN', selectedBun: TIngredientData }
-  | { type: 'UPDATE_INGREDIENT', dragIndex: number, hoverIndex: number }
-  | { type: 'DELETE_ITEM' }
-  | { type: 'RESET_CONSTRUCTOR' };
+  | { type: typeof ADD_INGREDIENT, selectedIngredient: TIngredientData }
+  | { type: typeof ADD_BUN, selectedBun: TIngredientData }
+  | { type: typeof UPDATE_INGREDIENT, dragIndex: number, hoverIndex: number }
+  | { type: typeof DELETE_ITEM, item: TIngredientData }
+  | { type: typeof RESET_CONSTRUCTOR };
 
 
 export function getSelectedBun(item: TIngredientData): AppThunk {  

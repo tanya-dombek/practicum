@@ -1,5 +1,7 @@
-import { AppThunk, TUserType } from '../../types/types';
+import { AppThunk, TUserType, TChangeUserInfoBody } from '../../types/types';
 import { SET_AUTH } from "../login/login-action";
+import { BASE_URL } from '../../utils/rests-utils';
+import { checkResponse, request } from '../../utils/rests-utils';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILED = 'GET_USER_FAILED';
 export const PATCH_USER_SUCCESS = 'PATCH_USER_SUCCESS';
@@ -7,28 +9,24 @@ export const PATCH_USER_FAILED = 'PATCH_USER_FAILED';
 export const SET_USER = 'SET_USER';
 
 export type TUserAction =
-  | { type: 'GET_USER_SUCCESS' }
-  | { type: 'GET_USER_FAILED' }
-  | { type: 'PATCH_USER_SUCCESS' }
-  | { type: 'PATCH_USER_FAILED' }
-  | { type: 'SET_USER', user: TUserType }
-  | { type: 'SET_AUTH', isAuthChecked: boolean };
-
-const checkResponse = (res: Response) => {
-    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err))
-}
+  | { type: typeof GET_USER_SUCCESS }
+  | { type: typeof GET_USER_FAILED }
+  | { type: typeof PATCH_USER_SUCCESS }
+  | { type: typeof PATCH_USER_FAILED }
+  | { type: typeof SET_USER, user: TUserType }
+  | { type: typeof SET_AUTH, isAuthChecked: boolean };
 
 export const refreshToken = (): Promise<any> => {
-    const url = 'https://norma.nomoreparties.space/api/auth/token';
-    return fetch (url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            token: localStorage.getItem("refreshToken"),
-        })
-    }).then(checkResponse);
+    const url = BASE_URL + '/auth/token';
+    return request(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          token: localStorage.getItem("refreshToken"),
+      })
+  });
 };
 
 export const fetchWithRefresh = async (url: string, options: any) => {
@@ -53,7 +51,7 @@ export const fetchWithRefresh = async (url: string, options: any) => {
   };
 
 export const getUser = () => {
-    const url = 'https://norma.nomoreparties.space/api/auth/user';
+    const url =  BASE_URL + '/auth/user';
     return async (dispatch: any) => {
       try {
         const response = await fetchWithRefresh(url, {
@@ -74,14 +72,8 @@ export const getUser = () => {
     };
   };
 
-  type TChangeUserInfoBody = {
-    name: string,
-    email: string,
-    password?: string
-  }
-
   export const changeUserInfo = (user: TChangeUserInfoBody, password: string): AppThunk => {
-    const url = 'https://norma.nomoreparties.space/api/auth/user';
+    const url =  BASE_URL + '/auth/user';
     const body: TChangeUserInfoBody = {
         "name": user.name,
         "email": user.email, 

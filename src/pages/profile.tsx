@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './pages.module.css';
 import { Input, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../types/types';
 import { signOut } from '../services/logout/logout-action';
 import { changeUserInfo } from '../services/user/user-action';
-import { RootState } from '../services/root-reducer';
 import { TUserType } from '../types/types';
 import _ from 'lodash';
 
@@ -13,8 +12,8 @@ export function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [origUser, setOrigUser] = useState<TUserType>(useSelector((store: RootState) => store.user.user))
-  const [user, setUser] = useState<TUserType>(useSelector((store: RootState) => store.user.user))
+  const [origUser, setOrigUser] = useState<TUserType>(useSelector(store => store.user.user))
+  const [user, setUser] = useState<TUserType>(useSelector(store => store.user.user))
   const [password, setPassword] = useState<string>('')
   const [disable, setDisable] = useState<boolean>(true)
 

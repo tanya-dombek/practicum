@@ -1,7 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../types/types';
 import { Navigate, useLocation } from 'react-router-dom';
-import { RootState } from '../../services/root-reducer';
 import { TUserType } from '../../types/types';
 
 type ProtectedRouteProps = {
@@ -10,8 +9,8 @@ type ProtectedRouteProps = {
 }
 
 const ProtectedRouteElement = ({onlyUnAuth = false, component}: ProtectedRouteProps): JSX.Element | null => {
-    const isAuthChecked: boolean = useSelector((store: RootState) => store.login.isAuthChecked);
-    const user: TUserType = useSelector((store: RootState) => store.user.user);
+    const isAuthChecked: boolean = useSelector(store => store.login.isAuthChecked);
+    const user: TUserType = useSelector(store => store.user.user);
     const location = useLocation();
 
     if (!isAuthChecked) {

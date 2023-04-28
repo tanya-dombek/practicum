@@ -55,6 +55,12 @@ export type TLoginType = {
     password: string;
 }
 
+export type TChangeUserInfoBody = {
+    name: string,
+    email: string,
+    password?: string
+  }
+
 export type AppActions =
     | TConstructorAction
     | TForgotPasswordAction

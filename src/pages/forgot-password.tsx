@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import styles from './pages.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../types/types';
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { postForgotPassword } from '../services/forgot-password/forgot-password-action';
-import { RootState } from '../services/root-reducer';
 
 export function ForgotPasswordPage() {
   const dispatch = useDispatch();
-  const apiData = useSelector((store: RootState) => store.forgotPassword);
+  const apiData = useSelector(store => store.forgotPassword);
   const [email, setEmail] = useState<string>('')
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

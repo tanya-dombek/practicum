@@ -3,19 +3,18 @@ import styles from './burger-ingredients.module.css'
 import { useLocation, Link } from 'react-router-dom';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsComponent from './ingredients-component'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../../types/types';
 import { useInView } from 'react-intersection-observer';
 import { getIgredientDetails } from '../../services/ingredient-details/ingredient-details-action';
-import { RootState } from '../../services/root-reducer';
 import { TIngredientData } from '../../types/types';
 
  
 const BurgerIngredients = () => {
     const dispatch = useDispatch();
     let location = useLocation();
-    const bunIngredients: TIngredientData[] = useSelector((store: RootState) => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'bun'));
-    const sauceIngredients: TIngredientData[] = useSelector((store: RootState) => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'sauce'));
-    const mainIngredients: TIngredientData[] = useSelector((store: RootState) => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'main'));
+    const bunIngredients: TIngredientData[] = useSelector(store => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'bun'));
+    const sauceIngredients: TIngredientData[] = useSelector(store => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'sauce'));
+    const mainIngredients: TIngredientData[] = useSelector(store => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'main'));
 
     const [activeTab, setActiveTab] = useState<string>('one');
     const [bunRef, bunInView] = useInView({ threshold: 0 });

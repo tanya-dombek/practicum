@@ -3,21 +3,20 @@ import styles from'./burger-contructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../modal-components/modal';
 import OrderDetails from './order-details'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../../types/types';
 import { getOrderData, CLOSE_ORDER_MODAL } from '../../services/order/order-action';
 import {RESET_CONSTRUCTOR} from '../../services/constructor/constructor-action';
 import {RESET_COUNTER} from '../../services/ingredients/ingredients-action';
 import { useNavigate  } from 'react-router-dom';
-import { RootState } from '../../services/root-reducer';
 import { TIngredientData, TUserType } from '../../types/types';
 
 const ComponentsInfo = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user: TUserType = useSelector((store: RootState) => store.user.user)
-    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData } = useSelector((store: RootState) => store.cart);
+    const user: TUserType = useSelector(store => store.user.user)
+    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData } = useSelector(store => store.cart);
         
-    const isOpen = useSelector((store: RootState) => store.order.openOrderModal);
+    const isOpen = useSelector(store => store.order.openOrderModal);
 
     const totalPrice = useMemo(() => {
         return selectedIngredients.reduce((acc: number, item: TIngredientData) => acc + item.price, 0) + (selectedBun ? (selectedBun.price*2) : 0);

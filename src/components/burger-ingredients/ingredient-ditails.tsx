@@ -2,14 +2,12 @@ import React, {useEffect, useState, FC} from 'react'
 import styles from './burger-ingredients.module.css'
 import CaloriesDetails from './calories-details';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../services/root-reducer';
+import { useSelector } from '../../types/types';
 import { TIngredientData } from '../../types/types';
-
  
 const IngredientDetails = () => {
     const [ingredientInfo, setIngredientInfo] = useState<TIngredientData | null>(null);
-    const ingredients: TIngredientData[] = useSelector((store: RootState) => store.ingredients.ingredients);
+    const ingredients: TIngredientData[] = useSelector(store => store.ingredients.ingredients);
     let { id } = useParams();
 
     useEffect(

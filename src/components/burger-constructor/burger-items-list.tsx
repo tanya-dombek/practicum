@@ -2,16 +2,15 @@ import React, {FC} from 'react'
 import styles from'./burger-contructor.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrop } from "react-dnd";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../../types/types';
 import { getSelectedBun, getSelectedIngredient, updateIngredientsConstructor} from '../../services/constructor/constructor-action';
 import { INCREASE_COUNTER, DECREASE_COUNTER} from '../../services/ingredients/ingredients-action';
 import IngredientsConstructorList from './ingredients-constructor';
-import { RootState } from '../../services/root-reducer';
 import { TIngredientData } from '../../types/types';
  
 const BurgerItemsList = () => {
     const dispatch = useDispatch();
-    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData } = useSelector((store: RootState) => store.cart);
+    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData } = useSelector(store => store.cart);
 
     const addBun = (item: TIngredientData) => {
         dispatch(getSelectedBun(item));

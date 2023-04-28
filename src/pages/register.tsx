@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import styles from './pages.module.css';
 import { Input, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../types/types';
 import { postRegistration } from '../services/register/register-action';
-import { RootState } from '../services/root-reducer';
 import { TRegistrationType } from '../types/types';
 
 export function RegistrationPage() {
   const dispatch = useDispatch();
-  const apiData = useSelector((store: RootState) => store.registration);
+  const apiData = useSelector(store => store.registration);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [user, setUser] = useState<TRegistrationType>({name: '', email: '', password: ''})
 

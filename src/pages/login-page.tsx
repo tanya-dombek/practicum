@@ -2,15 +2,14 @@ import React, { useState} from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
 import { Input, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './pages.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../types/types';
 import { signIn } from '../services/login/login-action';
-import { RootState } from '../services/root-reducer';
 import { TLoginType } from '../types/types';
 
 export function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const apiData = useSelector((store: RootState) => store.login);
+  const apiData = useSelector(store => store.login);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [user, setUser] = useState<TLoginType>({email: '', password: ''})
 
@@ -18,7 +17,7 @@ export function LoginPage() {
     setShowPassword(!showPassword);
   };
 
-  let onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch(signIn(user));
       if (apiData.loginSuccessful) {navigate(-1)};
