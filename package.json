@@ -7,10 +7,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.13",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "json-diff": "^1.0.3",
     "prop-types": "^15.8.1",
@@ -51,5 +47,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.2",
+    "@types/lodash": "^4.14.194",
+    "@types/node": "^16.18.24",
+    "@types/react": "^18.0.38",
+    "@types/react-dom": "^18.0.11",
+    "@types/uuid": "^9.0.1"
   }
 }
