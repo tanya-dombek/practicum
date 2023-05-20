@@ -1,10 +1,14 @@
-import { LOGOUT_SUCCESS, LOGOUT_FAILED } from "./logout-action";
+import { LOGOUT_SUCCESS, LOGOUT_FAILED, TSignOutAction } from "./logout-action";
 
-const initialState = {
+type TInitialState = {
+  logoutSuccessful: boolean;
+}
+
+const initialState: TInitialState = {
     logoutSuccessful: false,
   };
 
-  export const logoutReducer = (state = initialState, action) => {
+  export const logoutReducer = (state = initialState, action: TSignOutAction): TInitialState => {
     switch (action.type) {
       case LOGOUT_SUCCESS: {
         return { ...state, logoutSuccessful: action.logoutSuccessful};

@@ -1,17 +1,16 @@
-import React, {useEffect, useState, FC} from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from './burger-ingredients.module.css'
 import { useLocation, Link } from 'react-router-dom';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsComponent from './ingredients-component'
-import { useDispatch, useSelector } from '../../types/types';
+import { useSelector } from '../../types/types';
 import { useInView } from 'react-intersection-observer';
-import { getIgredientDetails } from '../../services/ingredient-details/ingredient-details-action';
 import { TIngredientData } from '../../types/types';
 
  
 const BurgerIngredients = () => {
-    const dispatch = useDispatch();
     let location = useLocation();
+    
     const bunIngredients: TIngredientData[] = useSelector(store => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'bun'));
     const sauceIngredients: TIngredientData[] = useSelector(store => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'sauce'));
     const mainIngredients: TIngredientData[] = useSelector(store => store.ingredients.ingredients.filter((item: TIngredientData) => item.type === 'main'));
@@ -20,10 +19,6 @@ const BurgerIngredients = () => {
     const [bunRef, bunInView] = useInView({ threshold: 0 });
     const [sauceRef, sauceInView] = useInView({ threshold: 0 });
     const [mainRef, mainInView] = useInView({ threshold: 0 });
-
-    const openModal = (ingredient: TIngredientData) => {
-        dispatch(getIgredientDetails(ingredient))
-    };;
 
     useEffect(() => {
         if (bunInView) {
@@ -54,8 +49,7 @@ const BurgerIngredients = () => {
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {bunIngredients.map((item: TIngredientData) => (
                         <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
-                            <IngredientsComponent key={item._id} ingredientData={[item]}
-                            onToggleModal={() => openModal(item)}/>
+                            <IngredientsComponent key={item._id} ingredientData={[item]}/>
                         </Link>
                     ))}
                 </div>
@@ -64,8 +58,7 @@ const BurgerIngredients = () => {
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {sauceIngredients.map((item: TIngredientData) => (
                         <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
-                            <IngredientsComponent key={item._id} ingredientData={[item]}
-                            onToggleModal={() => openModal(item)}/>
+                            <IngredientsComponent key={item._id} ingredientData={[item]}/>
                         </Link>
                     ))}
                 </div>
@@ -73,8 +66,7 @@ const BurgerIngredients = () => {
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {mainIngredients.map((item: TIngredientData) => (
                         <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
-                            <IngredientsComponent key={item._id} ingredientData={[item]}
-                            onToggleModal={() => openModal(item)}/>
+                            <IngredientsComponent key={item._id} ingredientData={[item]}/>
                         </Link>
                     ))}
                 </div>

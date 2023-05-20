@@ -1,4 +1,4 @@
-import { configureStore, ThunkAction } from "@reduxjs/toolkit";
+import { ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "../services/root-reducer";
 import {
     TypedUseSelectorHook,
@@ -9,13 +9,14 @@ import type {} from "redux-thunk/extend-redux";
 import { TOrderAction } from "../services/order/order-action";
 import { TConstructorAction } from "../services/constructor/constructor-action";
 import { TForgotPasswordAction } from "../services/forgot-password/forgot-password-action";
-import { TIgredientDetailsAction } from "../services/ingredient-details/ingredient-details-action";
 import { TIgredientsAction } from "../services/ingredients/ingredients-action";
 import { TRegistrationAction } from "../services/register/register-action";
 import { TSignInAction } from "../services/login/login-action";
 import { TSignOutAction } from "../services/logout/logout-action";
 import { TResetPasswordAction } from "../services/reset-password/reset-password-action";
 import { TUserAction } from "../services/user/user-action";
+import { TWSFeedOrdersActions, TWSProfileOrdersActions } from "../services/middleware/ws-action";
+import { TOrderDetailsAction } from "../services/order-details/order-details-action";
 
 export type TIngredientData = {
     _id: string;
@@ -64,7 +65,6 @@ export type TChangeUserInfoBody = {
 export type AppActions =
     | TConstructorAction
     | TForgotPasswordAction
-    | TIgredientDetailsAction
     | TIgredientsAction
     | TSignInAction
     | TSignOutAction
@@ -72,6 +72,9 @@ export type AppActions =
     | TRegistrationAction
     | TResetPasswordAction
     | TUserAction
+    | TWSFeedOrdersActions
+    | TWSProfileOrdersActions
+    | TOrderDetailsAction
 
 export type AppThunk<ReturnType = void> = ThunkAction<
     ReturnType,

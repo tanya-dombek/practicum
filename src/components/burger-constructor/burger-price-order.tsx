@@ -1,4 +1,4 @@
-import React, {useMemo, FC} from 'react'
+import React, {useMemo, useState} from 'react'
 import styles from'./burger-contructor.module.css'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../modal-components/modal';
@@ -13,22 +13,26 @@ import { TIngredientData, TUserType } from '../../types/types';
 const ComponentsInfo = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user: TUserType = useSelector(store => store.user.user)
-    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData } = useSelector(store => store.cart);
+    const user: TUserType | null = useSelector(store => store.user.user)
+    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData | null } = useSelector(store => store.cart);
         
-    const isOpen = useSelector(store => store.order.openOrderModal);
+    const [isOpen, setIsOpen] = useState(false);
 
     const totalPrice = useMemo(() => {
         return selectedIngredients.reduce((acc: number, item: TIngredientData) => acc + item.price, 0) + (selectedBun ? (selectedBun.price*2) : 0);
     }, [selectedIngredients, selectedBun]);
 
-    const orderIdArray = (bun: TIngredientData, ingredients: TIngredientData[]) => {
+    const orderIdArray = (bun: TIngredientData | null, ingredients: TIngredientData[]) => {
         let idArray: string[] = [];
-        idArray.unshift(bun._id);
+        if (bun) {
+            idArray.unshift(bun._id);
+        }
         ingredients.forEach((item: TIngredientData) => {
             idArray.push(item._id);
         })
-        idArray.push(bun._id);
+        if (bun) {
+            idArray.push(bun._id);
+        }
         return idArray
     }
 
@@ -36,11 +40,13 @@ const ComponentsInfo = () => {
         if (!user) {
             navigate('/login');
           } else {
+            setIsOpen(true);
             dispatch(getOrderData(orderIdArray(selectedBun, selectedIngredients)))
           }
     };
 
     const closeModal = () => {
+        setIsOpen(false);
         dispatch({type: CLOSE_ORDER_MODAL});
         dispatch({type: RESET_CONSTRUCTOR});
         dispatch({type: RESET_COUNTER});

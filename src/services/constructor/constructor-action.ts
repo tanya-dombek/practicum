@@ -1,10 +1,10 @@
 import {v4 as uuid} from 'uuid';
 import { TIngredientData, AppThunk } from '../../types/types';
-export const ADD_BUN = 'ADD_BUN';
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const DELETE_ITEM = 'DELETE_ITEM';
-export const UPDATE_INGREDIENT = 'UPDATE_INGREDIENT';
-export const RESET_CONSTRUCTOR = 'RESET_CONSTRUCTOR';
+export const ADD_BUN: 'ADD_BUN' = 'ADD_BUN';
+export const ADD_INGREDIENT: 'ADD_INGREDIENT' = 'ADD_INGREDIENT';
+export const DELETE_ITEM: 'DELETE_ITEM' = 'DELETE_ITEM';
+export const UPDATE_INGREDIENT: 'UPDATE_INGREDIENT' = 'UPDATE_INGREDIENT';
+export const RESET_CONSTRUCTOR: 'RESET_CONSTRUCTOR' = 'RESET_CONSTRUCTOR';
 
 export type TConstructorAction =
   | { type: typeof ADD_INGREDIENT, selectedIngredient: TIngredientData }

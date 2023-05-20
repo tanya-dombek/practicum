@@ -1,12 +1,18 @@
-import { POST_ORDER_FAILED, POST_ORDER_SUCCESS, CLOSE_ORDER_MODAL } from "./order-action";
+import { POST_ORDER_FAILED, POST_ORDER_SUCCESS, CLOSE_ORDER_MODAL, TOrderAction } from "./order-action";
 
-const initialState = {
+type TInitialState = {
+  orderNumber: number | null;
+  orderFailed: boolean;
+  openOrderModal: boolean;
+}
+
+const initialState: TInitialState = {
     orderNumber: null,
     orderFailed: false,
     openOrderModal: false,
   };
 
-  export const orderReducer = (state = initialState, action) => {
+  export const orderReducer = (state = initialState, action: TOrderAction): TInitialState => {
     switch (action.type) {
       case POST_ORDER_SUCCESS: {
         return { ...state, orderFailed: false, orderNumber: action.orderNumber, openOrderModal: action.orderNumber ? true : false};

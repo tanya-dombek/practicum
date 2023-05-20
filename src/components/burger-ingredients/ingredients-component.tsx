@@ -6,10 +6,9 @@ import { TIngredientData } from '../../types/types';
 
 type TIngredientsComponentType = {
     ingredientData: TIngredientData[];
-    onToggleModal: (item: TIngredientData) => void;
   }
 
-const IngredientsComponent: FC<TIngredientsComponentType> = ({ingredientData, onToggleModal}) => {
+const IngredientsComponent: FC<TIngredientsComponentType> = ({ingredientData}) => {
     const ingredient: TIngredientData = ingredientData[0];
 
     const [{}, dragRef]: any = useDrag({
@@ -22,7 +21,7 @@ const IngredientsComponent: FC<TIngredientsComponentType> = ({ingredientData, on
     ) : null;
 
     return ( 
-        <div className={styles.ingredientContainerStyle} onClick={() => onToggleModal(ingredient)} ref={dragRef}>
+        <div className={styles.ingredientContainerStyle} ref={dragRef}>
             {addIcon}
             <img srcSet={ingredient.image_large} className={styles.imgChanges} alt={ingredient.name}/>
             <div className={styles.ingredientStyle}>
