@@ -1,4 +1,4 @@
-import { AppThunk, TUserType, TChangeUserInfoBody } from '../../types/types';
+import { AppThunk, TUserType, TChangeUserInfoBody, AppDispatch } from '../../types/types';
 import { SET_AUTH } from "../login/login-action";
 import { BASE_URL } from '../../utils/rests-utils';
 import { checkResponse, request } from '../../utils/rests-utils';
@@ -52,7 +52,7 @@ export const fetchWithRefresh = async (url: string, options: any) => {
 
 export const getUser = () => {
     const url =  BASE_URL + '/auth/user';
-    return async (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
       try {
         const response = await fetchWithRefresh(url, {
           method: "GET",

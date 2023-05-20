@@ -83,7 +83,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
     AppActions
 >;
 
-type AppDispatch<TReturnType = void> = (
+export type AppDispatch<TReturnType = void> = (
     action: AppActions | AppThunk<TReturnType>
   ) => TReturnType;
 

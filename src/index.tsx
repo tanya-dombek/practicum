@@ -6,11 +6,9 @@ import { Provider } from 'react-redux';
 import { rootReducer } from './services/root-reducer';
 import { BrowserRouter as Router } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import { ORDERS_FEED_CONNECT as connect, ORDERS_FEED_DISCONNECT as disconnect,
-  ORDERS_FEED_SUCCESS as wsOpen, ORDERS_FEED_CLOSE as wsClose, ORDERS_FEED_ERROR as wsError,
-  WS_GET_FEED_ORDERS as wsFeedOrders } from '././services/middleware/ws-action';
-  import {ORDERS_PROFILE_SUCCESS, ORDERS_PROFILE_ERROR, ORDERS_PROFILE_DISCONNECT, WS_GET_PROFILE_ORDERS, ORDERS_PROFILE_CONNECT, ORDERS_PROFILE_CLOSE} from '././services/middleware/ws-action';
-  import { socketMiddleware, socketMiddleware2 } from './services/middleware/socket-middleware';
+import { ORDERS_FEED_CONNECT, ORDERS_FEED_DISCONNECT, ORDERS_FEED_SUCCESS, ORDERS_FEED_CLOSE, ORDERS_FEED_ERROR, WS_GET_FEED_ORDERS } from '././services/middleware/ws-action';
+import {ORDERS_PROFILE_SUCCESS, ORDERS_PROFILE_ERROR, ORDERS_PROFILE_DISCONNECT, WS_GET_PROFILE_ORDERS, ORDERS_PROFILE_CONNECT, ORDERS_PROFILE_CLOSE} from '././services/middleware/ws-action';
+import { socketMiddleware } from './services/middleware/socket-middleware';
 
 declare global {
   interface Window {
@@ -21,24 +19,24 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const feedOrdersMiddleware = socketMiddleware({
-  wsConnect: connect,
-  wsDisconnect: disconnect,
-  onOpen: wsOpen,
-  onClose: wsClose,
-  onError: wsError,
-  onFeedOrders: wsFeedOrders,
+  wsConnect: ORDERS_FEED_CONNECT,
+  wsDisconnect: ORDERS_FEED_DISCONNECT,
+  onOpen: ORDERS_FEED_SUCCESS,
+  onClose: ORDERS_FEED_CLOSE,
+  onError: ORDERS_FEED_ERROR,
+  onFeedOrders: WS_GET_FEED_ORDERS,
 })
 
-const feedOrdersMiddleware2 = socketMiddleware2({
+const profileFeedOrdersMiddleware = socketMiddleware({
   wsConnect: ORDERS_PROFILE_CONNECT,
   wsDisconnect: ORDERS_PROFILE_DISCONNECT,
   onOpen: ORDERS_PROFILE_SUCCESS,
   onClose: ORDERS_PROFILE_CLOSE,
   onError: ORDERS_PROFILE_ERROR,
-  onProfileOrders: WS_GET_PROFILE_ORDERS,
+  onFeedOrders: WS_GET_PROFILE_ORDERS,
 })
 
-const enhancer = composeEnhancers(applyMiddleware(thunk, feedOrdersMiddleware, feedOrdersMiddleware2));
+const enhancer = composeEnhancers(applyMiddleware(thunk, feedOrdersMiddleware, profileFeedOrdersMiddleware));
 const store = createStore(rootReducer, enhancer);
 
 const rootElement = document.getElementById('root');

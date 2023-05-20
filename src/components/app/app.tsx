@@ -27,6 +27,10 @@ const App = () => {
   const location = useLocation();
   const background = location.state && location.state.background;  
   
+  const feedOrderPath = "/feed/:number";
+  const profileOrderPath = "/profile/orders/:number";
+  const ingregientIdPath = "/ingredients/:id";
+
   const handleModalClose = () => {
     navigate(-1);
   }
@@ -55,26 +59,26 @@ const App = () => {
           <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage/>}/>}/>
           <Route path="/profile" element={<OnlyAuth component={<ProfilePage/>}/>} />
           <Route path="/profile/orders" element={<OnlyAuth component={<ProfilePage/>}/>} />
-          <Route path="/profile/orders/:number" element={<OnlyAuth component={<OrderFeedDetails/>}/>} />
-          <Route path="/ingredients/:id" element={<IngredientDetails/>}/>
+          <Route path={profileOrderPath} element={<OnlyAuth component={<OrderFeedDetails/>}/>} />
+          <Route path={ingregientIdPath} element={<IngredientDetails/>}/>
           <Route path="/feed" element={<FeedForm/>}/>
-          <Route path="/feed/:number" element={<OrderFeedDetails/>}/>
+          <Route path={feedOrderPath} element={<OrderFeedDetails/>}/>
           <Route path="/*" element={<NotFound404/>} />
         </Routes>
 
         {background && (
           <Routes>
-            <Route path="/ingredients/:id" element={
+            <Route path={ingregientIdPath} element={
               <Modal title='Детали ингредиента' onClose={handleModalClose}>
                 <IngredientDetails/>
               </Modal>
             }/>
-              <Route path="/feed/:number" element={
+              <Route path={feedOrderPath} element={
               <Modal title='' onClose={handleModalClose}>
                 <OrderFeedDetails/>
               </Modal>
             }/>
-            <Route path="/profile/orders/:number" element={
+            <Route path={profileOrderPath} element={
               <OnlyAuth component={
                 <Modal title='' onClose={handleModalClose}>
                   <OrderFeedDetails/>

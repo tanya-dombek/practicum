@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './pages.module.css';
 import { Input, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -27,9 +27,9 @@ export function ProfilePage() {
     setDisable(!disable);
   }
 
-  const isActive = (path: string) => {
+  const isActive = useCallback((path: string) => {
     return location.pathname === path;
-  };
+  }, [location.pathname]);
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user) {
@@ -61,14 +61,17 @@ export function ProfilePage() {
   };
 
   useEffect(() => {
+    
     if (user) {
       dispatch({ type: ORDERS_PROFILE_CONNECT, url: PROFILE_ORDERS_SERVER_URL });
     }
 
     return () => {
-      dispatch({ type: ORDERS_PROFILE_DISCONNECT });
+      if (isActive('/profile/orders')) {
+        dispatch({ type: ORDERS_PROFILE_DISCONNECT });
+      }
     };
-  }, [dispatch, user]);
+  }, [dispatch, user, isActive]);
 
   if (!user) {
     navigate('/login');
