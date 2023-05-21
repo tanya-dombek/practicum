@@ -21,13 +21,13 @@ const Modal: FC<TModalType> = ({ children, onClose, title }) => {
         return()=> {
             document.removeEventListener('keydown', handleEscapeBtn);
         };
-    }, [])
+    }, [onClose])
     
     return ReactDOM.createPortal(
         (
             <>
                 <ModalOverlay handleClick={onClose}/>
-                <div className={`${styles.modal} pt-10 pb-15 pr-10 pl-10`}>
+                <div className={`${styles.modal} pt-10 pb-10 pr-10 pl-10`}>
                     <p className={`text text_type_main-large ${styles.titleIcon}`}>
                         {title}
                         <span className={styles.closeIcon}>

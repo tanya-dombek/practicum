@@ -10,7 +10,7 @@ type ProtectedRouteProps = {
 
 const ProtectedRouteElement = ({onlyUnAuth = false, component}: ProtectedRouteProps): JSX.Element | null => {
     const isAuthChecked: boolean = useSelector(store => store.login.isAuthChecked);
-    const user: TUserType = useSelector(store => store.user.user);
+    const user: TUserType | null = useSelector(store => store.user.user);
     const location = useLocation();
 
     if (!isAuthChecked) {

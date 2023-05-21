@@ -1,11 +1,16 @@
-import { REGISTER_SUCCESS, REGISTER_FAILED } from "./register-action";
+import { REGISTER_SUCCESS, REGISTER_FAILED, TRegistrationAction } from "./register-action";
 
-const initialState = {
+type TInitialState = {
+  registrationSuccessful: boolean;
+  errMsg?: string | null;
+}
+
+const initialState: TInitialState = {
     registrationSuccessful: false,
     errMsg: null
   };
 
-  export const registrationReducer = (state = initialState, action) => {
+  export const registrationReducer = (state = initialState, action: TRegistrationAction): TInitialState => {
     switch (action.type) {
       case REGISTER_SUCCESS: {
         return { ...state, registrationSuccessful: true};

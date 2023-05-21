@@ -17,7 +17,7 @@ const AppHeader = () => {
                             <span>Конструктор</span></>
                         )}
                     </NavLink>
-                    <NavLink to='/orders' className={({isActive}) => isActive ? activeTabStyle : tabStyle}>
+                    <NavLink to='/feed' className={({isActive}) => isActive ? activeTabStyle : tabStyle}>
                         {({ isActive }) => (<>
                             <ListIcon  type={isActive ? 'primary' : 'secondary'} />
                             <span>Список заказов</span></>

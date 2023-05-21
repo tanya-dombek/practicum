@@ -1,0 +1,126 @@
+.feedContainer{
+    width: 100%;
+    max-width: 600px;
+    height: 912px;
+    left: 340px;
+    top: 88px;
+    background: #131316;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.scrollBar{
+    height: 756px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.modalScrollBar{
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 32px;
+}
+
+.feedGroupe{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1240px;
+   justify-content: space-between; 
+
+}
+
+.statusContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    margin: 100px 0 60px 0;
+}
+
+.bigModalContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.smallModalContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.ulContainer{
+    list-style-type: none;
+}
+
+.columnsContainer{
+    display: flex;
+    gap: 8px;
+}
+
+.readyOrder{
+    color: #00CCCC;
+    margin: 0 0 8px 0px;
+}
+
+.pendingOrder{
+    margin: 0 0 8px 0px;
+}
+
+.orderHeader{
+    margin: 0 0 24px 0;
+}
+
+.zeroMargin{
+    margin: 0px;
+}
+
+.ingredientsLink{
+    text-decoration: none;
+    color: white;
+}
+
+.ingredientsIlustration{
+    background: #000000;
+    border: 2px solid;
+    border-color: #801AB2;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.cardContainer{
+    background: #1C1C21;
+    padding: 16px 24px;
+    border-radius: 40px;
+    padding: 100px;
+}
+
+.idAndDate{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.numberAndName{
+    display: grid;
+    gap: 40px;
+}
+
+.displayGrid{
+    display: grid;
+    gap: 16px;
+}
+
+.maxNameWidth{
+    max-width: 250px;
+}

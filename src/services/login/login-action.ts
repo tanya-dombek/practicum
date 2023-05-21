@@ -2,9 +2,9 @@ import { AppThunk, TUserType, TLoginType } from '../../types/types';
 import { BASE_URL } from '../../utils/rests-utils';
 import { SET_USER } from "../user/user-action";
 import { request } from '../../utils/rests-utils';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILED = 'LOGIN_FAILED';
-export const SET_AUTH = 'SET_AUTH';
+export const LOGIN_SUCCESS: 'LOGIN_SUCCESS' = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED: 'LOGIN_FAILED' = 'LOGIN_FAILED';
+export const SET_AUTH: 'SET_AUTH' = 'SET_AUTH';
 
 export type TSignInAction =
   | { type: typeof LOGIN_SUCCESS }

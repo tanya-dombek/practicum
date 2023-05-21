@@ -1,12 +1,12 @@
-import { AppThunk, TUserType, TChangeUserInfoBody } from '../../types/types';
+import { AppThunk, TUserType, TChangeUserInfoBody, AppDispatch } from '../../types/types';
 import { SET_AUTH } from "../login/login-action";
 import { BASE_URL } from '../../utils/rests-utils';
 import { checkResponse, request } from '../../utils/rests-utils';
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-export const GET_USER_FAILED = 'GET_USER_FAILED';
-export const PATCH_USER_SUCCESS = 'PATCH_USER_SUCCESS';
-export const PATCH_USER_FAILED = 'PATCH_USER_FAILED';
-export const SET_USER = 'SET_USER';
+export const GET_USER_SUCCESS: 'GET_USER_SUCCESS' = 'GET_USER_SUCCESS';
+export const GET_USER_FAILED: 'GET_USER_FAILED' = 'GET_USER_FAILED';
+export const PATCH_USER_SUCCESS: 'PATCH_USER_SUCCESS' = 'PATCH_USER_SUCCESS';
+export const PATCH_USER_FAILED: 'PATCH_USER_FAILED' = 'PATCH_USER_FAILED';
+export const SET_USER: 'SET_USER' = 'SET_USER';
 
 export type TUserAction =
   | { type: typeof GET_USER_SUCCESS }
@@ -52,7 +52,7 @@ export const fetchWithRefresh = async (url: string, options: any) => {
 
 export const getUser = () => {
     const url =  BASE_URL + '/auth/user';
-    return async (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
       try {
         const response = await fetchWithRefresh(url, {
           method: "GET",

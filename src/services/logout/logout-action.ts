@@ -2,8 +2,8 @@ import { AppThunk } from '../../types/types';
 import { SET_USER } from "../user/user-action";
 import { BASE_URL } from '../../utils/rests-utils';
 import { request } from '../../utils/rests-utils';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+export const LOGOUT_SUCCESS: 'LOGOUT_SUCCESS' = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILED: 'LOGOUT_FAILED' = 'LOGOUT_FAILED';
 
 export type TSignOutAction =
   | { type: typeof LOGOUT_SUCCESS, logoutSuccessful: boolean }

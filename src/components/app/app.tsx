@@ -1,6 +1,6 @@
-import React, {useEffect, FC} from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch } from '../../types/types';
-import { Routes, Route, useLocation, useNavigate  } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import styles from './app.module.css'
 import AppHeader from '../header/app-header-form';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients-form'
@@ -16,15 +16,20 @@ import {ProfilePage} from '../../pages/profile';
 import { NotFound404 } from '../../pages/not-found-404';
 import { OnlyAuth, OnlyUnAuth } from './protected-route';
 import { checkUserAuth } from '../../services/user/user-action';
-import { OrderHistory } from '../orders/order-history';
+import { FeedForm } from '../feed/feed-form';
 import Modal from '../modal-components/modal';
 import IngredientDetails from '../burger-ingredients/ingredient-ditails';
+import { OrderFeedDetails } from '../feed/order-details';
 
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const background = location.state && location.state.background;
+  const background = location.state && location.state.background;  
+  
+  const feedOrderPath = "/feed/:number";
+  const profileOrderPath = "/profile/orders/:number";
+  const ingregientIdPath = "/ingredients/:id";
 
   const handleModalClose = () => {
     navigate(-1);
@@ -53,18 +58,33 @@ const App = () => {
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage/>}/>}/>
           <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage/>}/>}/>
           <Route path="/profile" element={<OnlyAuth component={<ProfilePage/>}/>} />
-          <Route path="/ingredients/:id" element={<IngredientDetails/>}/>
-          <Route path="/orders" element={<OrderHistory/>}/>
+          <Route path="/profile/orders" element={<OnlyAuth component={<ProfilePage/>}/>} />
+          <Route path={profileOrderPath} element={<OnlyAuth component={<OrderFeedDetails/>}/>} />
+          <Route path={ingregientIdPath} element={<IngredientDetails/>}/>
+          <Route path="/feed" element={<FeedForm/>}/>
+          <Route path={feedOrderPath} element={<OrderFeedDetails/>}/>
           <Route path="/*" element={<NotFound404/>} />
         </Routes>
 
         {background && (
           <Routes>
-            <Route path="/ingredients/:id" element={
+            <Route path={ingregientIdPath} element={
               <Modal title='Детали ингредиента' onClose={handleModalClose}>
                 <IngredientDetails/>
               </Modal>
             }/>
+              <Route path={feedOrderPath} element={
+              <Modal title='' onClose={handleModalClose}>
+                <OrderFeedDetails/>
+              </Modal>
+            }/>
+            <Route path={profileOrderPath} element={
+              <OnlyAuth component={
+                <Modal title='' onClose={handleModalClose}>
+                  <OrderFeedDetails/>
+                </Modal>}/>
+            }/>
+            
           </Routes>
         )}
       </div>

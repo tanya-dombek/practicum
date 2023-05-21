@@ -1,9 +1,9 @@
 import { AppThunk } from "../../types/types";
 import { BASE_URL } from '../../utils/rests-utils';
 import { request } from '../../utils/rests-utils';
-export const CLOSE_ORDER_MODAL = 'CLOSE_ORDER_MODAL';
-export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';
-export const POST_ORDER_FAILED = 'POST_ORDER_FAILED';
+export const CLOSE_ORDER_MODAL: 'CLOSE_ORDER_MODAL' = 'CLOSE_ORDER_MODAL';
+export const POST_ORDER_SUCCESS: 'POST_ORDER_SUCCESS' = 'POST_ORDER_SUCCESS';
+export const POST_ORDER_FAILED: 'POST_ORDER_FAILED' = 'POST_ORDER_FAILED';
 
 export type TOrderAction =
   | { type: typeof CLOSE_ORDER_MODAL }
@@ -17,7 +17,8 @@ export const getOrderData = (ids: string[]): AppThunk => {
       request(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          authorization: localStorage.getItem("accessToken"),
         },
         body: JSON.stringify(body)
       }).then(result => {

@@ -3,8 +3,8 @@ import { SET_USER } from "../user/user-action";
 import { SET_AUTH } from "../login/login-action";
 import { BASE_URL } from '../../utils/rests-utils';
 import { request } from '../../utils/rests-utils';
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_FAILED = 'REGISTER_FAILED';
+export const REGISTER_SUCCESS: 'REGISTER_SUCCESS' = 'REGISTER_SUCCESS';
+export const REGISTER_FAILED: 'REGISTER_FAILED' = 'REGISTER_FAILED';
 
 export type TRegistrationAction =
   | { type: typeof REGISTER_SUCCESS }

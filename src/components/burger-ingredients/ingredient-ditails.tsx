@@ -1,4 +1,4 @@
-import React, {useEffect, useState, FC} from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from './burger-ingredients.module.css'
 import CaloriesDetails from './calories-details';
 import { useParams } from 'react-router-dom';

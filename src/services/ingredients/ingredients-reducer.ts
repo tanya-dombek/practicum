@@ -1,11 +1,17 @@
-import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, INCREASE_COUNTER, DECREASE_COUNTER, RESET_COUNTER } from "./ingredients-action";
+import { GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, INCREASE_COUNTER, DECREASE_COUNTER, RESET_COUNTER, TIgredientsAction } from "./ingredients-action";
+import { TIngredientData } from '../../types/types';
 
-const initialState = {
+type TInitialState = {
+  ingredients: Array<TIngredientData>;
+  ingredientsFailed: boolean;
+}
+
+const initialState: TInitialState = {
     ingredients: [],
     ingredientsFailed: false,
   };
 
-  export const ingredientsReducer = (state = initialState, action) => {
+  export const ingredientsReducer = (state = initialState, action: TIgredientsAction): TInitialState => {
     switch (action.type) {
       case GET_INGREDIENTS_SUCCESS: {
         return { ...state, ingredientsFailed: false, ingredients: action.ingredients };

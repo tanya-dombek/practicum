@@ -10,7 +10,7 @@ import { TIngredientData } from '../../types/types';
  
 const BurgerItemsList = () => {
     const dispatch = useDispatch();
-    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData } = useSelector(store => store.cart);
+    const {selectedIngredients, selectedBun}: { selectedIngredients: TIngredientData[], selectedBun: TIngredientData | null } = useSelector(store => store.cart);
 
     const addBun = (item: TIngredientData) => {
         dispatch(getSelectedBun(item));

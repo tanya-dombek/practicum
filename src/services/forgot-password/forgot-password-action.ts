@@ -1,8 +1,8 @@
 import { AppThunk } from '../../types/types';
 import { BASE_URL } from '../../utils/rests-utils';
 import { request } from '../../utils/rests-utils';
-export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
-export const FORGOT_PASSWORD_FAILED = 'FORGOT_PASSWORD_FAILED';
+export const FORGOT_PASSWORD_SUCCESS: 'FORGOT_PASSWORD_SUCCESS' = 'FORGOT_PASSWORD_SUCCESS';
+export const FORGOT_PASSWORD_FAILED: 'FORGOT_PASSWORD_FAILED' = 'FORGOT_PASSWORD_FAILED';
 
 export type TForgotPasswordAction =
   | { type: typeof FORGOT_PASSWORD_SUCCESS }
