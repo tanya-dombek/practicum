@@ -1,7 +1,7 @@
 {
   "name": "react-burger",
   "version": "0.1.0",
-  "homepage":  "./",
+  "homepage":  "https://tanya-dombek.github.io/practicum/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
