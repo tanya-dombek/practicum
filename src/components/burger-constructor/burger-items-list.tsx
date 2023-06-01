@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {} from 'react'
 import styles from'./burger-contructor.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrop } from "react-dnd";
@@ -64,19 +64,19 @@ const BurgerItemsList = () => {
 
     return ( 
         <div className={`pb-10 ${styles.orderContainer} pr-4 ${styles.scrollBar} custom-scroll`}>
-            <div ref={dropBunTarget} style={{borderColor: borderBunColor}} className={styles.borderBun}>
+            <div ref={dropBunTarget} style={{borderColor: borderBunColor}} className={styles.borderBun} data-testid='constructor-buns-area' data-test='top-bun'>
                 {selectedBun ? (<ConstructorElement  type='top' isLocked={true} price={selectedBun.price} thumbnail={selectedBun.image_mobile}
                 text={`${selectedBun.name} (верх)`}/>) :
-                (<div className={`${styles.emptyIngredientContainer} ${styles.emptyTopContainer}`}>Выберите булки</div>)}
+                (<div className={`${styles.emptyIngredientContainer} ${styles.emptyTopContainer}`} >Выберите булки</div>)}
             </div>
-            <div ref={dropTarget} style={{borderColor: borderIngredientColor}} className={styles.borderIngredient}>
+            <div ref={dropTarget} style={{borderColor: borderIngredientColor}} className={styles.borderIngredient} data-testid='constructor-ingredients-area'>
                 {selectedIngredients.length !== 0 ? selectedIngredients.map((item: TIngredientData, index: number) => {
-                    return (<IngredientsConstructorList item={item} key={item.key} moveIngredient={moveIngredient} id={item.key} index={index}/>)
-                }) : (<div className={`${styles.emptyIngredientContainer} ${styles.emptyMiddleContainer} ml-10`}>Выберите ингредиенты</div>)}
+                    return (<IngredientsConstructorList item={item} key={item.key} moveIngredient={moveIngredient} id={item.key} index={index} data-testid='constructor-ingredients'/>)
+                }) : (<div className={`${styles.emptyIngredientContainer} ${styles.emptyMiddleContainer} ml-10`} >Выберите ингредиенты</div>)}
             </div>
-            <div ref={dropBunBottomTarget} style={{borderColor: borderBunColor}} className={styles.borderBun}>
+            <div ref={dropBunBottomTarget} style={{borderColor: borderBunColor}} className={styles.borderBun} data-test='bottom-bun'>
             {selectedBun ? (<ConstructorElement  type='bottom' isLocked={true} price={selectedBun.price} thumbnail={selectedBun.image_mobile}
-                text={`${selectedBun.name} (низ)`}/>) :
+                text={`${selectedBun.name} (низ)`} />) :
                 (<div className={`${styles.emptyIngredientContainer} ${styles.emptyBottomContainer}`}>Выберите булки</div>)}
             </div>
         </div>

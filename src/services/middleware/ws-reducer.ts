@@ -9,14 +9,13 @@
     error?: string;
   }
   
-  const initialState: TWSState = {
+  export const initialState: TWSState = {
     status: 'OFFLINE',
     feedOrders: null,
     error: ''
   };
   
-  export const wsFeedReducer = (state = initialState, action: TWSFeedOrdersActions) => {
-    
+  export const wsFeedReducer = (state = initialState, action: TWSFeedOrdersActions) => {    
     switch (action.type) {
         case ORDERS_FEED_CONNECT:
         return {

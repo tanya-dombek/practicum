@@ -7,7 +7,7 @@ type TInitialState = {
   updateUserSuccessful: boolean;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     user: null,
     getUserSuccessful: false,
     updateUserSuccessful: false

@@ -6,7 +6,7 @@ type TInitialState = {
   openOrderModal: boolean;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     orderNumber: null,
     orderFailed: false,
     openOrderModal: false,

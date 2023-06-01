@@ -4,14 +4,14 @@ type TInitialState = {
   logoutSuccessful: boolean;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     logoutSuccessful: false,
   };
 
   export const logoutReducer = (state = initialState, action: TSignOutAction): TInitialState => {
     switch (action.type) {
       case LOGOUT_SUCCESS: {
-        return { ...state, logoutSuccessful: action.logoutSuccessful};
+        return { ...state, logoutSuccessful: true};
       }
       case LOGOUT_FAILED: {
         return { ...state, logoutSuccessful: false };

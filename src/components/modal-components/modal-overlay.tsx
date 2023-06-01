@@ -7,7 +7,7 @@ type TModalOverlayType = {
 
 const ModalOverlay: FC<TModalOverlayType> = ({ handleClick }) => {
     return (
-        <div className={styles.overlay} onClick={handleClick}/>       
+        <div className={styles.overlay} onClick={handleClick} data-testid='modal-overlay'/>       
     )
 }
 

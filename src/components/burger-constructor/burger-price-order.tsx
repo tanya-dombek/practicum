@@ -58,7 +58,7 @@ const ComponentsInfo = () => {
                 <p className="text text_type_digits-medium">{totalPrice}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button htmlType="button" type="primary" size="medium" onClick={openModal} disabled={selectedIngredients.length===0 || !selectedBun}>
+            <Button htmlType="button" type="primary" size="medium" onClick={openModal} disabled={selectedIngredients.length===0 || !selectedBun} data-testid='create-order-btn'>
                 Оформить заказ
             </Button>
             {isOpen && (<Modal onClose={closeModal} title=''>

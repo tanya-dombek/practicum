@@ -48,7 +48,7 @@ const BurgerIngredients = () => {
                 <div ref={bunRef} className="text text_type_main-medium pt-10 pb-6">Булки</div>
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {bunIngredients.map((item: TIngredientData) => (
-                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
+                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink} data-testid='bun-container'>
                             <IngredientsComponent key={item._id} ingredientData={[item]}/>
                         </Link>
                     ))}
@@ -57,7 +57,7 @@ const BurgerIngredients = () => {
                 <div ref={sauceRef} className="text text_type_main-medium pt-10 pb-6">Соусы</div>
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {sauceIngredients.map((item: TIngredientData) => (
-                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
+                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink} data-testid='sauce-container'>
                             <IngredientsComponent key={item._id} ingredientData={[item]}/>
                         </Link>
                     ))}
@@ -65,7 +65,7 @@ const BurgerIngredients = () => {
                 <div ref={mainRef} className="text text_type_main-medium pt-10 pb-6">Начинки</div>
                 <div className={`pl-4 pr-4 ${styles.ingredientsGroup}`}>
                     {mainIngredients.map((item: TIngredientData) => (
-                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink}>
+                        <Link key={item._id} to={`/ingredients/${item._id}`} state={{ background: location }} className={styles.ingredientsLink} data-testid='main-container'>
                             <IngredientsComponent key={item._id} ingredientData={[item]}/>
                         </Link>
                     ))}

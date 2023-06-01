@@ -7,7 +7,7 @@ import { resetPasswordReducer } from './reset-password/reset-password-reducer';
 import { registrationReducer } from './register/register-reducer';
 import { loginReducer } from './login/login-reducer';
 import { logoutReducer } from './logout/logout-reducer';
-import { userReducer } from './user/user.reducer';
+import { userReducer } from './user/user-reducer';
 import { wsFeedReducer } from './middleware/ws-reducer';
 import { wsProfileReducer } from './middleware/ws-profile-reducer';
 import { orderDetailsReducer } from './order-details/order-details-reducer';

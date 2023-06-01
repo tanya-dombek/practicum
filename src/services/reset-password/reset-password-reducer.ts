@@ -5,7 +5,7 @@ type TInitialState = {
   errMsg?: string | null;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     resetPasswordSuccessful: false,
     errMsg: null
   };
