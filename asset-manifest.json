@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/practicum/static/css/main.9259d4e8.css",
-    "main.js": "/practicum/static/js/main.b19232c0.js",
+    "main.css": "/practicum/static/css/main.fa630ad6.css",
+    "main.js": "/practicum/static/js/main.941e1871.js",
     "static/media/JetBrainsMono-Regular.ttf": "/practicum/static/media/JetBrainsMono-Regular.93b40005892466035ab0.ttf",
     "static/media/JetBrainsMono-Bold.woff": "/practicum/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/practicum/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -11,11 +11,11 @@
     "static/media/iceland.woff2": "/practicum/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
     "static/media/success-icon.svg": "/practicum/static/media/success-icon.0204cd30ec32b9238cf65b1b302dfdc7.svg",
     "index.html": "/practicum/index.html",
-    "main.9259d4e8.css.map": "/practicum/static/css/main.9259d4e8.css.map",
-    "main.b19232c0.js.map": "/practicum/static/js/main.b19232c0.js.map"
+    "main.fa630ad6.css.map": "/practicum/static/css/main.fa630ad6.css.map",
+    "main.941e1871.js.map": "/practicum/static/js/main.941e1871.js.map"
   },
   "entrypoints": [
-    "static/css/main.9259d4e8.css",
-    "static/js/main.b19232c0.js"
+    "static/css/main.fa630ad6.css",
+    "static/js/main.941e1871.js"
   ]
 }
