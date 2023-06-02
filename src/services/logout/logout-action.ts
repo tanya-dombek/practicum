@@ -6,7 +6,7 @@ export const LOGOUT_SUCCESS: 'LOGOUT_SUCCESS' = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILED: 'LOGOUT_FAILED' = 'LOGOUT_FAILED';
 
 export type TSignOutAction =
-  | { type: typeof LOGOUT_SUCCESS, logoutSuccessful: boolean }
+  | { type: typeof LOGOUT_SUCCESS }
   | { type: typeof LOGOUT_FAILED }
   | { type: typeof SET_USER, user: null };
 
@@ -22,7 +22,7 @@ export function signOut(): AppThunk {
         body: JSON.stringify(body)
       }).then(result => {
             if (result && result.success) {
-                dispatch({type: LOGOUT_SUCCESS, logoutSuccessful: true});
+                dispatch({type: LOGOUT_SUCCESS});
                 dispatch({
                     type: SET_USER,
                     user: null

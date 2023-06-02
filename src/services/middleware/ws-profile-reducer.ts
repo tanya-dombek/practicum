@@ -8,14 +8,13 @@ import { ORDERS_PROFILE_SUCCESS, ORDERS_PROFILE_ERROR, ORDERS_PROFILE_DISCONNECT
     error?: string;
   }
   
-  const initialState: TWSState = {
+  export const initialState: TWSState = {
     status: 'OFFLINE',
     profileOrders: null,
     error: ''
   };
   
-  export const wsProfileReducer = (state = initialState, action: TWSProfileOrdersActions) => {
-    
+  export const wsProfileReducer = (state = initialState, action: TWSProfileOrdersActions) => {    
     switch (action.type) {
         case ORDERS_PROFILE_CONNECT:
         return {

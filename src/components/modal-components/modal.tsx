@@ -27,10 +27,10 @@ const Modal: FC<TModalType> = ({ children, onClose, title }) => {
         (
             <>
                 <ModalOverlay handleClick={onClose}/>
-                <div className={`${styles.modal} pt-10 pb-10 pr-10 pl-10`}>
+                <div className={`${styles.modal} pt-10 pb-10 pr-10 pl-10`} data-testid='modal'>
                     <p className={`text text_type_main-large ${styles.titleIcon}`}>
                         {title}
-                        <span className={styles.closeIcon}>
+                        <span className={styles.closeIcon} data-testid='close-btn'>
                             <CloseIcon onClick={onClose} type="primary"/>
                         </span>
                     </p>

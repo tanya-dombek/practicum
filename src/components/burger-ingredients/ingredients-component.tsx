@@ -21,7 +21,7 @@ const IngredientsComponent: FC<TIngredientsComponentType> = ({ingredientData}) =
     ) : null;
 
     return ( 
-        <div className={styles.ingredientContainerStyle} ref={dragRef}>
+        <div className={styles.ingredientContainerStyle} ref={dragRef} data-testid='ingredient'>
             {addIcon}
             <img srcSet={ingredient.image_large} className={styles.imgChanges} alt={ingredient.name}/>
             <div className={styles.ingredientStyle}>

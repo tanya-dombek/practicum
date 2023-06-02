@@ -4,7 +4,7 @@ import App from './components/app/app';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer } from './services/root-reducer';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import { ORDERS_FEED_CONNECT, ORDERS_FEED_DISCONNECT, ORDERS_FEED_SUCCESS, ORDERS_FEED_CLOSE, ORDERS_FEED_ERROR, WS_GET_FEED_ORDERS } from '././services/middleware/ws-action';
 import {ORDERS_PROFILE_SUCCESS, ORDERS_PROFILE_ERROR, ORDERS_PROFILE_DISCONNECT, WS_GET_PROFILE_ORDERS, ORDERS_PROFILE_CONNECT, ORDERS_PROFILE_CLOSE} from '././services/middleware/ws-action';

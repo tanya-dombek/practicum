@@ -1,5 +1,4 @@
 import { LOGIN_SUCCESS, LOGIN_FAILED, SET_AUTH, TSignInAction } from "./login-action";
-import { TUserType } from "../../types/types";
 
 type TInitialState = {
   isAuthChecked: boolean;
@@ -7,7 +6,7 @@ type TInitialState = {
   loginSuccessful: boolean;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     isAuthChecked: false,
     errMsg: null,
     loginSuccessful: false,

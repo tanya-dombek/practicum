@@ -6,7 +6,7 @@ type TInitialState = {
   orderDetailsFailed: boolean;
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
     orderDetails: null,
     orderDetailsFailed: false,
   };

@@ -9,7 +9,7 @@ function OrderDetails () {
     return ( 
         orderNumber ? (
             <div className={styles.modalItems}>
-            <p className={`text text_type_digits-large ${styles.orderNumder}`}>{orderNumber}</p>
+            <p className={`text text_type_digits-large ${styles.orderNumder}`} data-testid='order-number'>{orderNumber}</p>
             <p className="text text_type_main-medium pb-15 pt-8">идентификатор заказа</p>
             <CheckMarkIcon />
             <p className="text text_type_main-small pt-15 pb-2">Ваш заказ начали готовить</p>
