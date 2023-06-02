@@ -30,7 +30,7 @@ The build is minified and the filenames include the hashes.\
 
 App is ready to be deployed!
 
-See it on [deployment](https://tanya-dombek.github.io/practicum/).
+See it on [https://tanya-dombek.github.io/practicum/](https://tanya-dombek.github.io/practicum/).
 
 ### `npm run eject`
 
