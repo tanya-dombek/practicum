@@ -1,6 +1,9 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a cosmic burger shop. You can register or sign in to make an order.
+On a first page you will see ingredients and a burger constructor. Drag ingredient to select it. After that you can place your order.
+On a second page you will see dynamic orders feed.
+You also have your account with orders history and setings.
 
 ## Available Scripts
 
